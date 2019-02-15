@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import Row from "components/Row";
-import Column from "components/Column";
-import Lists from "../Lists";
-import Button from "@material-ui/core/Button";
-import { actions } from "../../redux/listsPanel/listsPanel.actions";
+import React from "react"
+import { connect } from "react-redux"
+import Row from "components/Row"
+import Column from "components/Column"
+import Lists from "../Lists"
+import Button from "@material-ui/core/Button"
+import { actions } from "../../redux/listsPanel/listsPanel.actions"
 
 class ListsView extends React.PureComponent {
   handleOnAdd = () => {
-    const { addNewList } = this.props;
-    addNewList({ newList: { name: "", description: "" } });
+    const { addNewList } = this.props
+    addNewList({ newList: { name: "", description: "" } })
   };
 
   render() {
@@ -33,19 +33,19 @@ class ListsView extends React.PureComponent {
           </Column>
         </Row>
       </React.Fragment>
-    );
+    )
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     addNewList: newList => {
-      dispatch(actions.addNew(newList));
+      dispatch(actions.addNew(newList))
     }
-  };
-};
+  }
+}
 
 export default connect(
   null,
   mapDispatchToProps
-)(ListsView);
+)(ListsView)

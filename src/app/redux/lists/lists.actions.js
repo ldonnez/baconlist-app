@@ -1,4 +1,4 @@
-import { createTypes, actionCreator } from "redux-action-creator";
+import { createTypes, actionCreator } from "redux-action-creator"
 
 export const types = createTypes(
   [
@@ -13,7 +13,7 @@ export const types = createTypes(
     "GET_FAIL"
   ],
   "LISTS"
-);
+)
 
 export const actions = {
   get: actionCreator(types.GET),
@@ -27,4 +27,4 @@ export const actions = {
   patch: actionCreator(types.PATCH, "data"),
   patchSuccess: actionCreator(types.PATCH_SUCCESS),
   patchFail: actionCreator(types.PATCH_FAIL, "errors")
-};
+}

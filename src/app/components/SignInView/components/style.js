@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import styled from "@emotion/styled"
+import CircularProgress from "@material-ui/core/CircularProgress"
 
 export default styled(CircularProgress)`
     position: 'absolute',
@@ -7,4 +7,4 @@ export default styled(CircularProgress)`
     left: '50%',
     marginTop: -12,
     marginLeft: -12,
-`;
+`

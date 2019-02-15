@@ -1,10 +1,10 @@
-import React from "react";
-import SignInForm from "./components/SignInForm";
-import CenteredCard from "components/CenteredCard";
-import LinkButton from "components/LinkButton";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from '@material-ui/core/Typography';
+import React from "react"
+import SignInForm from "./components/SignInForm"
+import CenteredCard from "components/CenteredCard"
+import LinkButton from "components/LinkButton"
+import CardActions from "@material-ui/core/CardActions"
+import CardContent from "@material-ui/core/CardContent"
+import Typography from "@material-ui/core/Typography"
 
 
 class SignInView extends React.PureComponent {
@@ -21,8 +21,8 @@ class SignInView extends React.PureComponent {
           <LinkButton fullWidth size="small" to="/signup">Sign up here</LinkButton>
         </CardActions>
       </CenteredCard>
-    );
+    )
   }
 }
 
-export default SignInView;
+export default SignInView

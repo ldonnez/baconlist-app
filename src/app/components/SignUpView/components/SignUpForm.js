@@ -1,29 +1,29 @@
-import React from "react";
-import { connect } from "react-redux";
-import { actions } from "../../../redux/users/users.actions";
-import Form from "components/Form";
-import ActionContainer from "components/ActionContainer";
-import SubmitButton from "components/SubmitButton";
-import TextField from "components/TextField";
-import * as selectors from "../../../redux/users/users.selectors";
-import withValidations from "components/Hocs/Validation";
-import validations  from "./validations";
+import React from "react"
+import { connect } from "react-redux"
+import { actions } from "../../../redux/users/users.actions"
+import Form from "components/Form"
+import ActionContainer from "components/ActionContainer"
+import SubmitButton from "components/SubmitButton"
+import TextField from "components/TextField"
+import * as selectors from "../../../redux/users/users.selectors"
+import withValidations from "components/Hocs/Validation"
+import validations  from "./validations"
 
 export class SignUpForm extends React.PureComponent {
 
   retrieveErrors = () => {
-    const { validationErrors, errors } = this.props;
+    const { validationErrors, errors } = this.props
     return { ...validationErrors, ...errors }
   }
 
   handleSubmit = e => {
-    e.preventDefault();
-    const { postUser, data } = this.props;
-    postUser({ data: data });
+    e.preventDefault()
+    const { postUser, data } = this.props
+    postUser({ data: data })
   };
 
   render() {
-    const { loading } = this.props;
+    const { loading } = this.props
     return (
       <Form method="POST" onSubmit={this.handleSubmit}>
         <TextField
@@ -64,26 +64,26 @@ export class SignUpForm extends React.PureComponent {
           </SubmitButton>
         </ActionContainer>
       </Form>
-    );
+    )
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     postUser: fields => {
-      dispatch(actions.post(fields));
+      dispatch(actions.post(fields))
     }
-  };
-};
+  }
+}
 
 const mapStateToProps = state => {
   return {
     errors: selectors.getErrors(state),
     loading: selectors.isLoading(state)
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withValidations(SignUpForm, validations));
+)(withValidations(SignUpForm, validations))

@@ -23,7 +23,9 @@ export const isExpired = (date, today = new Date()) => {
 }
 
 export const parseToken = (token) => {
-	if (typeof token !== "string") return
+	if (typeof token !== "string") {
+return
+}
 	const base64Url = token.split(".")[1]
 	const base64 = base64Url.replace("-", "+").replace("_", "/")
 	return JSON.parse(window.atob(base64))

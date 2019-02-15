@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects"
 import * as api from "../../api/oauth"
 import * as token from "../../localStorage/token"
 import { actions, types } from "./authentication.actions"
-import { push } from 'connected-react-router'
+import { push } from "connected-react-router"
 
 export function* authenticateFlow(action) {
 	try {
