@@ -1,11 +1,15 @@
 import React from "react"
 import { connect } from "react-redux"
-import ExpansionPanel from "@material-ui/core/ExpansionPanel"
-import ExpansionPanelActions from "@material-ui/core/ExpansionPanelActions"
 import SubmitButton from "components/SubmitButton"
 import Button from "@material-ui/core/Button"
 import Divider from "@material-ui/core/Divider"
 
+import Card from "@material-ui/core/Card"
+import CardHeader from "@material-ui/core/CardHeader"
+import CardContent from "@material-ui/core/CardContent"
+import CardActions from "@material-ui/core/CardActions"
+import Avatar from "@material-ui/core/Avatar"
+import Collapse from "@material-ui/core/Collapse"
 import TextField from "components/TextField"
 import Row from "components/Row"
 import Column from "components/Column"
@@ -14,14 +18,9 @@ import withValidations from "components/Hocs/Validation"
 import validations from "./validations"
 import { actions } from "../../../../redux/listsPanel/listsPanel.actions"
 import { actions as listActions } from "../../../../redux/lists/lists.actions"
-import {
-  AddTaskButton,
-  RemoveTaskButton,
-  StyledExpansionPanelDetails,
-  StyledExpansionPanelSummary
-} from "./style"
+import { AddTaskButton, RemoveTaskButton } from "./style"
 
-class NewListPanel extends React.PureComponent {
+class NewListCard extends React.PureComponent {
   handleOnCancelClick = () => {
     const { cancel } = this.props
     cancel()
@@ -49,20 +48,25 @@ class NewListPanel extends React.PureComponent {
 
   render() {
     return (
-      <ExpansionPanel expanded>
-        <StyledExpansionPanelSummary>
-          <Column>
+      <Card>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="List">
+              {this.props.data &&
+                this.props.data.name &&
+                this.props.data.name.charAt(0).toUpperCase()}
+            </Avatar>
+          }
+          title={
             <TextField
-              fullWidth
               id="name"
               label="Name"
               errors={this.retrieveErrors()["name"]}
               {...this.props.fieldFor("name")}
             />
-          </Column>
-          <Column>
+          }
+          subheader={
             <TextField
-              fullWidth
               id="dueTo"
               type="date"
               label="Due to"
@@ -72,12 +76,15 @@ class NewListPanel extends React.PureComponent {
               errors={this.retrieveErrors()["due_to"]}
               {...this.props.fieldFor("due_to")}
             />
-          </Column>
-        </StyledExpansionPanelSummary>
+          }
+        />
+        <CardContent>
+          <Column />
+        </CardContent>
         <Divider />
-        <StyledExpansionPanelDetails>
+        <CardContent>
           <Row>
-            <Column xs>
+            <Column xs={12} lg={12} md={12}>
               <TextField
                 fullWidth
                 id="description"
@@ -91,51 +98,55 @@ class NewListPanel extends React.PureComponent {
               />
             </Column>
           </Row>
-          <Row>
-            <Column>
-              <AddTaskButton
-                onClick={this.handleAddTask}
-                size="medium"
-                color="primary"
-                disableRipple
-                disableFocusRipple
-              >
-                Add task
-              </AddTaskButton>
-            </Column>
-          </Row>
-          {this.props.fieldsFrom("tasks") &&
-            this.props.fieldsFrom("tasks").map((task, i) => {
-              return (
-                <Row key={i}>
-                  <Column grow={11} xs>
-                    {task.map((field, j) => {
-                      return (
-                        <TextField
-                          fullWidth
-                          disableFormControl
-                          key={j + i}
-                          label="Name"
-                          inputProps={{
-                            index: i,
-                            fieldindex: j
-                          }}
-                          {...field}
-                        />
-                      )
-                    })}
-                  </Column>
-                  <Column grow={1} xs>
-                    <RemoveTaskButton
-                      onClick={() => this.handleRemoveTask(i)}
-                    />
-                  </Column>
-                </Row>
-              )
-            })}
-        </StyledExpansionPanelDetails>
+        </CardContent>
+        <Collapse in={true} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Row>
+              <Column>
+                <AddTaskButton
+                  onClick={this.handleAddTask}
+                  size="medium"
+                  color="primary"
+                  disableRipple
+                  disableFocusRipple
+                >
+                  Add task
+                </AddTaskButton>
+              </Column>
+            </Row>
+            {this.props.fieldsFrom("tasks") &&
+              this.props.fieldsFrom("tasks").map((task, i) => {
+                return (
+                  <Row key={i}>
+                    <Column grow={11} xs>
+                      {task.map((field, j) => {
+                        return (
+                          <TextField
+                            fullWidth
+                            disableFormControl
+                            key={j + i}
+                            label="Name"
+                            inputProps={{
+                              index: i,
+                              fieldindex: j
+                            }}
+                            {...field}
+                          />
+                        )
+                      })}
+                    </Column>
+                    <Column grow={1} xs>
+                      <RemoveTaskButton
+                        onClick={() => this.handleRemoveTask(i)}
+                      />
+                    </Column>
+                  </Row>
+                )
+              })}
+          </CardContent>
+        </Collapse>
         <Divider />
-        <ExpansionPanelActions>
+        <CardActions>
           <SubmitButton
             type="submit"
             variant="text"
@@ -152,8 +163,8 @@ class NewListPanel extends React.PureComponent {
           >
             Cancel
           </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        </CardActions>
+      </Card>
     )
   }
 }
@@ -172,4 +183,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(withValidations(NewListPanel, validations))
+)(withValidations(NewListCard, validations))

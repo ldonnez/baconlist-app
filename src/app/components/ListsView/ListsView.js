@@ -3,7 +3,8 @@ import { connect } from "react-redux"
 import Row from "components/Row"
 import Column from "components/Column"
 import Lists from "../Lists"
-import Button from "@material-ui/core/Button"
+import Fab from "@material-ui/core/Fab"
+import AddIcon from "@material-ui/icons/Add"
 import { actions } from "../../redux/listsPanel/listsPanel.actions"
 
 class ListsView extends React.PureComponent {
@@ -17,21 +18,12 @@ class ListsView extends React.PureComponent {
       <React.Fragment>
         <Row>
           <Column spacing={4}>
-            <Button
-              size="medium"
-              variant="contained"
-              color="primary"
-              onClick={this.handleOnAdd}
-            >
-              Add
-            </Button>
+            <Fab onClick={this.handleOnAdd} color="primary" aria-label="Add">
+              <AddIcon />
+            </Fab>
           </Column>
         </Row>
-        <Row>
-          <Column spacing={4}>
-            <Lists />
-          </Column>
-        </Row>
+        <Lists />
       </React.Fragment>
     )
   }
