@@ -17,7 +17,7 @@ export function* postListsFlow(action) {
 		yield put(actions.postSuccess())
     yield put(actions.get())
 	} catch (e) {
-		yield put(actions.postFail({ errors: e }))
+		yield put(actions.postFail({ errors: e.response.data }))
 	}
 }
 
