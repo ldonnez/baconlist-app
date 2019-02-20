@@ -1,4 +1,4 @@
-import { types} from "./lists.actions"
+import { types } from "./lists.actions"
 
 
 const initialState = {

@@ -16,14 +16,14 @@ describe("Should manage token", () => {
 	it("should not expire accessToken", () =>{
 		const tomorrow = new Date()
 		tomorrow.setDate(tomorrow.getDate() + 1)
-		const accessToken = { exp: tomorrow.getTime()/1000}
+		const accessToken = { exp: tomorrow.getTime()/1000 }
 		expect(token.isAccessTokenExpired(accessToken)).toEqual(false)
 	})
 
 	it("should expire accessToken", () =>{
 		const yesterday = new Date()
 		yesterday.setDate(yesterday.getDate() - 1)
-		const accessToken = { exp: yesterday.getTime()/1000}
+		const accessToken = { exp: yesterday.getTime()/1000 }
 		expect(token.isAccessTokenExpired(accessToken)).toEqual(true)
 	})
 })
