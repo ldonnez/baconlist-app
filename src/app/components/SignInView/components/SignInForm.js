@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, memo } from "react"
 import { connect } from "react-redux"
 import { actions } from "../../../redux/authentication/authentication.actions"
 import Form from "components/Form"
@@ -6,38 +6,40 @@ import ActionContainer from "components/ActionContainer"
 import SubmitButton from "components/SubmitButton"
 import TextField from "components/TextField"
 import * as selectors from "../../../redux/authentication/authentication.selectors"
-import withValidations from "components/Hocs/Validation"
 import validations  from "./validations"
+import useValidator from "components/Hooks/validator"
 
-export class SignInForm extends React.PureComponent {
+export function SignInForm ({ authenticate, errors, loading }) {
+  const [formData, setFormData] = useState({ email: "", password: "" })
+  const validationErrors = useValidator(formData, errors, validations)
 
-  retrieveErrors = () => {
-    const { validationErrors, errors } = this.props
-    return { ...validationErrors, ...errors }
+  const handleOnChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
-    const { authenticate, data } = this.props
-    authenticate({ data: data })
-  };
+  const handleOnSubmit = (event) => {
+    event.preventDefault()
+    authenticate({ data: formData })
+  }
 
-  render() {
-    const { loading } = this.props
-    return (
-      <Form method="POST" onSubmit={this.handleSubmit}>
+  return (
+      <Form method="POST" onSubmit={handleOnSubmit}>
         <TextField
           id="email"
           label="E-mail"
-          errors={this.retrieveErrors()["email"]}
-          {...this.props.fieldFor("email")}
+          name="email"
+          value={formData.email}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["email"]}
         />
         <TextField
           id="password"
           label="Password"
           type="password"
-          errors={this.retrieveErrors()["password"]}
-          {...this.props.fieldFor("password")}
+          name="password"
+          value={formData.password}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["password"]}
         />
         <ActionContainer>
           <SubmitButton loading={loading} type="submit" variant="text" size="large" color="primary">
@@ -45,8 +47,7 @@ export class SignInForm extends React.PureComponent {
           </SubmitButton>
         </ActionContainer>
       </Form>
-    )
-  }
+  )
 }
 
 const mapDispatchToProps = dispatch => {
@@ -67,4 +68,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withValidations(SignInForm, validations))
+)(memo(SignInForm))
