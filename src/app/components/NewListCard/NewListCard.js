@@ -16,35 +16,35 @@ import Column from "components/Column"
 import withValidations from "components/Hocs/Validation"
 
 import validations from "./validations"
-import { actions } from "../../../../redux/listsPanel/listsPanel.actions"
-import { actions as listActions } from "../../../../redux/lists/lists.actions"
+import { actions as listActions } from "../../redux/lists/lists.actions"
 import { AddTaskButton, RemoveTaskButton } from "./style"
 
 class NewListCard extends React.PureComponent {
+
   handleOnCancelClick = () => {
-    const { cancel } = this.props
-    cancel()
-  };
+    const { onClose } = this.props
+    onClose()
+  }
 
   handleAddTask = () => {
     const { addFieldToKey } = this.props
     addFieldToKey("tasks", { name: "" })
-  };
+  }
 
   handleRemoveTask = index => {
     const { removeFieldFromKey } = this.props
     removeFieldFromKey("tasks", index)
-  };
+  }
 
   handleOnSaveClick = () => {
     const { data, postList } = this.props
     postList({ data: data })
-  };
+  }
 
   retrieveErrors = () => {
     const { validationErrors, errors } = this.props
     return { ...validationErrors, ...errors }
-  };
+  }
 
   render() {
     return (
@@ -171,9 +171,6 @@ class NewListCard extends React.PureComponent {
 
 const mapDispatchToProps = dispatch => {
   return {
-    cancel: () => {
-      dispatch(actions.cancelNew())
-    },
     postList: data => {
       dispatch(listActions.post(data))
     }

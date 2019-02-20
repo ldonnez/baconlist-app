@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import ListCard from "./components/ListCard"
-import NewListCard from "./components/NewListCard"
 import Row from "components/Row"
 import Column from "components/Column"
 import { actions } from "../../redux/lists/lists.actions"
@@ -22,17 +21,10 @@ class Lists extends React.PureComponent {
   };
 
   render() {
-    const { lists, newList } = this.props
+    const { lists } = this.props
 
     return (
       <React.Fragment>
-        {newList && (
-          <Row>
-            <Column spacing={8} lg={3} md={6} xs={12}>
-              <NewListCard newList={newList} />
-            </Column>
-          </Row>
-        )}
         <Row>
           {lists &&
             lists.map(l => {
