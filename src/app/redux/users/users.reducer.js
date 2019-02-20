@@ -19,6 +19,7 @@ export default (state = initialState, action) => {
 	case types.POST_SUCCESS:
 		return {
 			...state,
+      errors: null,
 			isLoading: false
 		}
 
