@@ -5,7 +5,6 @@ import Row from "components/Row"
 import Column from "components/Column"
 import { actions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
-import * as listsPanelSelectors from "../../redux/listsPanel/listsPanel.selectors"
 
 class Lists extends React.PureComponent {
   state = {};
@@ -56,8 +55,7 @@ const mapStateToProps = state => {
   return {
     errors: selectors.getErrors(state),
     loading: selectors.isLoading(state),
-    lists: selectors.getLists(state),
-    newList: listsPanelSelectors.getNewList(state)
+    lists: selectors.getLists(state)
   }
 }
 

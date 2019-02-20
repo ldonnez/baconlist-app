@@ -1,5 +1,4 @@
 import React from "react"
-import { connect } from "react-redux"
 import Row from "components/Row"
 import Column from "components/Column"
 import Lists from "../Lists"
@@ -7,7 +6,6 @@ import Popover from "@material-ui/core/Popover"
 import Fab from "@material-ui/core/Fab"
 import NewListCard from "../NewListCard"
 import AddIcon from "@material-ui/icons/Add"
-import { actions } from "../../redux/listsPanel/listsPanel.actions"
 
 class ListsView extends React.PureComponent {
   state = {
@@ -66,15 +64,4 @@ class ListsView extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addNewList: newList => {
-      dispatch(actions.addNew(newList))
-    }
-  }
-}
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(ListsView)
+export default ListsView
