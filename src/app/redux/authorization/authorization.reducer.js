@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        errors: null,
         authorized: true
       }
 
@@ -44,6 +45,7 @@ export default (state = initialState, action) => {
     case types.REFRESH_TOKEN_SUCCESS:
       return {
         ...state,
+        errors: null,
         loading: false
       }
 

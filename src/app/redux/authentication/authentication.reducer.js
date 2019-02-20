@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+        errors: null,
         authenticated: true
       }
 
