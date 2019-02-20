@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom"
 
 class NavigationItem extends React.PureComponent {
   render() {
-    const { name, to, icon: Icon} = this.props
+    const { name, to, icon: Icon } = this.props
 
     return (
       <NavLink to={to}>

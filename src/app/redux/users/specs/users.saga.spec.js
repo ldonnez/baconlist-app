@@ -30,7 +30,7 @@ describe("Should fail authentication", () => {
 	})
 
 	it("should call postFail", () => {
-		expect(gen.throw({response: {data: "error"}}).value).toEqual(put(actions.postFail({ errors: "error" })))
+		expect(gen.throw({ response: { data: "error" } }).value).toEqual(put(actions.postFail({ errors: "error" })))
 	})
 
 	it("should be done", () =>{
