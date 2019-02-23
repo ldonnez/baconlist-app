@@ -21,7 +21,17 @@ export function* postListsFlow(action) {
 	}
 }
 
-export default function* usersSaga() {
+export function* patchListsFlow(action) {
+	try {
+		yield call(api.patchLists, action.payload.data)
+		yield put(actions.patchSuccess({ data: action.payload.data }))
+	} catch (e) {
+		yield put(actions.patchFail({ errors: e.response.data }))
+	}
+}
+
+export default function* listsSaga() {
 	yield takeLatest(types.GET, getListsFlow)
 	yield takeLatest(types.POST, postListsFlow)
+	yield takeLatest(types.PATCH, patchListsFlow)
 }

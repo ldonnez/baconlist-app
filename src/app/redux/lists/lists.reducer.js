@@ -59,6 +59,7 @@ export default (state = initialState, action) => {
 	case types.PATCH_SUCCESS:
 		return {
 			...state,
+      data: updateList(state.data, action.payload.data),
 			isLoading: false
 		}
 
@@ -72,4 +73,17 @@ export default (state = initialState, action) => {
 	default:
 		return state
 	}
+}
+
+function updateList(lists, updatedList) {
+  return lists.map((list, index) => {
+    if (list.id!== updatedList.id) {
+      return list
+    }
+
+    return {
+      ...list,
+      ...updatedList
+    }
+  })
 }

@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import ListCard from "./components/ListCard"
+import ListCard from "../ListCard"
 import Row from "components/Row"
 import Column from "components/Column"
 import { actions } from "../../redux/lists/lists.actions"
