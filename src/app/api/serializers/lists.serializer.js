@@ -6,7 +6,9 @@ export const serializedList = (data) => {
 }
 
 const dateToISO = (dateString) => {
-  const d = new Date(dateString)
-  return d.toISOString()
+  if (dateString) {
+    const d = new Date(dateString)
+    return d.toISOString()
+  }
 }
 
