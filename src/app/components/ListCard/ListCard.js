@@ -56,7 +56,7 @@ class ListCard extends React.PureComponent {
     updateLists({ data: newList })
   }
 
-  render() {
+  render () {
     const { list, onChange, expanded } = this.props
     const tasks = list.tasks
     return (

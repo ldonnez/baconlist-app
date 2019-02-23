@@ -11,7 +11,7 @@ export default class BottomNavigation extends React.Component {
     this.setState({ value })
   };
 
-  render() {
+  render () {
     const { value } = this.state
     const { navigationItems } = this.props
     return (

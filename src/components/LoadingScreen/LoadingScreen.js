@@ -3,7 +3,7 @@ import LoadingIndicator from "../LoadingIndicator"
 import CenteredContainer from "../CenteredContainer"
 
 class LoadingScreen extends React.PureComponent {
-	render() {
+	render () {
 		return (
 			<React.Fragment>
 				<CenteredContainer>

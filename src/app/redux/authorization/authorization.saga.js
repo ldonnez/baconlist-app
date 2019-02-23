@@ -4,7 +4,7 @@ import * as token from "../../localStorage/token"
 import { actions, types } from "./authorization.actions"
 import { push } from "connected-react-router"
 
-export function* authorizationFlow(action) {
+export function* authorizationFlow (action) {
   try {
     const isExpired = yield call(
       token.isAccessTokenExpired,
@@ -20,7 +20,7 @@ export function* authorizationFlow(action) {
   }
 }
 
-function* refreshTokenFlow(action) {
+function* refreshTokenFlow (action) {
   try {
     const response = yield call(api.refreshToken, action.payload)
     yield call(token.storeToken, response && response.data)
@@ -31,6 +31,6 @@ function* refreshTokenFlow(action) {
   }
 }
 
-export default function* authorizationSaga() {
+export default function* authorizationSaga () {
   yield takeEvery(types.AUTHORIZE, authorizationFlow)
 }

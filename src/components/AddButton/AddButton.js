@@ -3,7 +3,7 @@ import AddIcon from "@material-ui/icons/Add"
 import Fab from "@material-ui/core/Fab"
 
 export default class AddButton extends React.PureComponent {
-  render() {
+  render () {
     const { onClick } = this.props
     return (
       <Fab

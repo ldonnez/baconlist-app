@@ -2,7 +2,7 @@ import React from "react"
 import ListsView from "../../components/ListsView"
 
 class Root extends React.PureComponent {
-  render() {
+  render () {
     return <ListsView />
   }
 }

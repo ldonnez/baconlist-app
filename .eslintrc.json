@@ -22,6 +22,7 @@
     "jsx-quotes": ["error", "prefer-double"],
     "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
-    "object-curly-spacing": ["error", "always"]
+    "object-curly-spacing": ["error", "always"],
+    "space-before-function-paren": ["error", "always"]
   }
 }

@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography"
 
 
 class SignUpView extends React.PureComponent {
-  render() {
+  render () {
     return (
       <CenteredCard width="450px" height="560px" padding="8px">
         <CardContent>

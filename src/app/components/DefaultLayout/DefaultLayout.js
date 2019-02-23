@@ -10,7 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import navigationItems from "../../navigationItems"
 
 export class Layout extends React.PureComponent {
-  render() {
+  render () {
     const { children, component: Component, ...rest } = this.props
     return (
       <Route

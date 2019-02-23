@@ -4,7 +4,7 @@ import * as token from "../../localStorage/token"
 import { actions, types } from "./authentication.actions"
 import { push } from "connected-react-router"
 
-export function* authenticateFlow(action) {
+export function* authenticateFlow (action) {
 	try {
 		const response = yield call(api.getToken, action.payload.data)
 		yield call(token.storeToken, response && response.data)
@@ -15,6 +15,6 @@ export function* authenticateFlow(action) {
 	}
 }
 
-export default function* authenticateSaga() {
+export default function* authenticateSaga () {
 	yield takeLatest(types.AUTHENTICATE, authenticateFlow)
 }

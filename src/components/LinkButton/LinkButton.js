@@ -3,7 +3,7 @@ import MuiButton from "@material-ui/core/Button"
 import { Link } from "react-router-dom"
 
 class LinkButton extends React.PureComponent {
-  render() {
+  render () {
     const { to, children, ...rest } = this.props
 
     return (

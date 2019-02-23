@@ -6,14 +6,14 @@ import * as token from "../../localStorage/token"
 
 const withAuthorization = WrappedComponent => {
   class Authorization extends React.Component {
-    componentDidMount() {
+    componentDidMount () {
       const { authorize } = this.props
       const accessToken = token.parseToken(token.getAccessToken())
       const refreshToken = token.getRefreshToken()
       authorize({ accessToken: accessToken, refreshToken: refreshToken })
     }
 
-    render() {
+    render () {
       return <WrappedComponent {...this.props} />
     }
   }

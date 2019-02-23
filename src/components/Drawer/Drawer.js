@@ -13,7 +13,7 @@ const styles = theme => ({
 })
 
 class Drawer extends React.PureComponent {
-  render() {
+  render () {
     const { classes, navigationItems } = this.props
 
     return (

@@ -9,7 +9,7 @@ const styles = theme => ({
   }
 })
 
-function Task({ name, index, onDelete, completed, created, classes }) {
+function Task ({ name, index, onDelete, completed, created, classes }) {
   const handleOnDelete = () => {
     onDelete(index)
   }
