@@ -4,11 +4,10 @@ import { CircularProgress } from "./style"
 
 class SubmitButton extends React.PureComponent {
   render() {
-    const { loading, children, ...rest } = this.props
-
+    const { loading, children, disabled, ...rest } = this.props
     return (
       <React.Fragment>
-        <MuiButton disabled={loading} type="submit" {...rest}>
+        <MuiButton disabled={disabled ? disabled : loading} type="submit" {...rest}>
           {children}
         </MuiButton>
         {loading && <CircularProgress size={24} />}
