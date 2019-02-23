@@ -25,6 +25,6 @@ export const actions = {
   postFail: actionCreator(types.POST_FAIL, "errors"),
 
   patch: actionCreator(types.PATCH, "data"),
-  patchSuccess: actionCreator(types.PATCH_SUCCESS),
+  patchSuccess: actionCreator(types.PATCH_SUCCESS, "data"),
   patchFail: actionCreator(types.PATCH_FAIL, "errors")
 }

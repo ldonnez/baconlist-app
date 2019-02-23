@@ -1,20 +1,23 @@
 import React, { useState, memo } from "react"
 import { connect } from "react-redux"
-import SubmitButton from "components/SubmitButton"
+
 import Button from "@material-ui/core/Button"
 import Divider from "@material-ui/core/Divider"
-
 import Card from "@material-ui/core/Card"
 import CardHeader from "@material-ui/core/CardHeader"
 import CardContent from "@material-ui/core/CardContent"
 import CardActions from "@material-ui/core/CardActions"
 import Avatar from "@material-ui/core/Avatar"
-import Collapse from "@material-ui/core/Collapse"
+
+import SubmitButton from "components/SubmitButton"
 import TextField from "components/TextField"
 import Row from "components/Row"
 import Column from "components/Column"
-import validations from "./validations"
 import useValidator from "components/Hooks/validator"
+import TaskField from "../TaskField"
+import Task from "../Task"
+
+import validations from "./validations"
 import { actions as listActions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
 
@@ -26,9 +29,20 @@ function NewListCard({ postList, errors, loading, onClose }) {
     tasks: []
   })
   const validationErrors = useValidator(formData, errors, validations)
-
   const handleOnChange = event => {
     setFormData({ ...formData, [event.target.name]: event.target.value })
+  }
+
+  const handleOnTaskAdd = value => {
+    const task = { name: value }
+    setFormData({ ...formData, tasks: [...formData.tasks, task] })
+  }
+
+  const handleOnDeleteTask = index => {
+    setFormData({
+      ...formData,
+      tasks: formData.tasks.filter((task, i) => i !== index)
+    })
   }
 
   const handleOnCancel = () => {
@@ -38,6 +52,9 @@ function NewListCard({ postList, errors, loading, onClose }) {
   const handleOnSave = event => {
     event.preventDefault()
     postList({ data: formData })
+    if (!loading) {
+      onClose()
+    }
   }
 
   return (
@@ -95,22 +112,36 @@ function NewListCard({ postList, errors, loading, onClose }) {
             />
           </Column>
         </Row>
+        <Row margin={8}>
+          <Column lg={12} md={12} xs={12}>
+            <TaskField onAdd={handleOnTaskAdd} />
+          </Column>
+        </Row>
+        {formData.tasks &&
+          formData.tasks.map((task, i) => {
+            return (
+              <Row key={task.name}>
+                <Column lg={12} md={12} xs={12}>
+                  <Task
+                    created
+                    name={task.name}
+                    index={i}
+                    onDelete={handleOnDeleteTask}
+                  />
+                </Column>
+              </Row>
+            )
+          })}
       </CardContent>
-      <Collapse in={true} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Row>
-            <Column>
-           </Column>
-          </Row>
-        </CardContent>
-      </Collapse>
       <Divider />
       <CardActions>
         <SubmitButton
+          disabled={validationErrors && Object.entries(validationErrors).length > 0}
           type="submit"
           variant="text"
           size="large"
           color="primary"
+          loading={loading}
           onClick={handleOnSave}
         >
           Save
