@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
 	}
 }
 
-function updateList(lists, updatedList) {
+function updateList (lists, updatedList) {
   return lists.map((list, index) => {
     if (list.id!== updatedList.id) {
       return list

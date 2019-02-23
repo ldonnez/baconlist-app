@@ -4,7 +4,7 @@ import FormHelperText from "@material-ui/core/FormHelperText"
 import FormControl from "../FormControl"
 
 class TextField extends React.PureComponent {
-  render() {
+  render () {
     const {
       name,
       label,

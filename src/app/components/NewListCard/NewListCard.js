@@ -21,7 +21,7 @@ import validations from "./validations"
 import { actions as listActions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
 
-function NewListCard({ postList, errors, loading, onClose }) {
+function NewListCard ({ postList, errors, loading, onClose }) {
   const [formData, setFormData] = useState({
     name: "",
     due_to: "",

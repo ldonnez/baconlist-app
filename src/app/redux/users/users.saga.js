@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects"
 import * as api from "../../api/users"
 import { actions, types } from "./users.actions"
 
-export function* createUsersFlow(action) {
+export function* createUsersFlow (action) {
 	try {
 		const { data } = action.payload
 		yield call(api.createUsers, data)
@@ -12,6 +12,6 @@ export function* createUsersFlow(action) {
 	}
 }
 
-export default function* usersSaga() {
+export default function* usersSaga () {
 	yield takeLatest(types.POST, createUsersFlow)
 }

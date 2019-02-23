@@ -4,7 +4,7 @@ import Input from "@material-ui/core/Input"
 import InputAdornment from "@material-ui/core/InputAdornment"
 import Add from "@material-ui/icons/Add"
 
-export default function TaskField({ onAdd }) {
+export default function TaskField ({ onAdd }) {
   const [value, setValue] = useState("")
 
   const handleOnChange = event => {

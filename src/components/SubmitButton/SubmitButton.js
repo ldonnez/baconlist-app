@@ -3,7 +3,7 @@ import MuiButton from "@material-ui/core/Button"
 import { CircularProgress } from "./style"
 
 class SubmitButton extends React.PureComponent {
-  render() {
+  render () {
     const { loading, children, disabled, ...rest } = this.props
     return (
       <React.Fragment>

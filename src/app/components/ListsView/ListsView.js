@@ -24,7 +24,7 @@ class ListsView extends React.PureComponent {
     })
   };
 
-  render() {
+  render () {
     const { anchorEl } = this.state
     const open = Boolean(anchorEl)
 

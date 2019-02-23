@@ -19,7 +19,7 @@ class Lists extends React.PureComponent {
     getLists()
   };
 
-  render() {
+  render () {
     const { lists } = this.props
 
     return (

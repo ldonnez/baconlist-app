@@ -3,7 +3,7 @@ import { StyledLoadingContainer } from "./style"
 import CircularProgress from "@material-ui/core/CircularProgress"
 
 class LoadingIndicator extends React.PureComponent {
-	render() {
+	render () {
 		return (
 			<React.Fragment>
 				<StyledLoadingContainer>

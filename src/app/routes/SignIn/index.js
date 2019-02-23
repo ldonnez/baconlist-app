@@ -2,7 +2,7 @@ import React from "react"
 import SignInView from "../../components/SignInView"
 
 class SignIn extends React.PureComponent {
-	render() {
+	render () {
 		return (
 			<SignInView />
 		)

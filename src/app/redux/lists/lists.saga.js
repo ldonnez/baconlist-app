@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects"
 import * as api from "../../api/lists"
 import { actions, types } from "./lists.actions"
 
-export function* getListsFlow(action) {
+export function* getListsFlow (action) {
 	try {
 		const response = yield call(api.getLists)
 		yield put(actions.getSuccess({ data: response && response.data }))
@@ -11,7 +11,7 @@ export function* getListsFlow(action) {
 	}
 }
 
-export function* postListsFlow(action) {
+export function* postListsFlow (action) {
 	try {
 		yield call(api.postLists, action.payload.data)
 		yield put(actions.postSuccess())
@@ -21,7 +21,7 @@ export function* postListsFlow(action) {
 	}
 }
 
-export function* patchListsFlow(action) {
+export function* patchListsFlow (action) {
 	try {
 		yield call(api.patchLists, action.payload.data)
 		yield put(actions.patchSuccess({ data: action.payload.data }))
@@ -30,7 +30,7 @@ export function* patchListsFlow(action) {
 	}
 }
 
-export default function* listsSaga() {
+export default function* listsSaga () {
 	yield takeLatest(types.GET, getListsFlow)
 	yield takeLatest(types.POST, postListsFlow)
 	yield takeLatest(types.PATCH, patchListsFlow)

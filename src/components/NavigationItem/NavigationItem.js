@@ -5,7 +5,7 @@ import ListItemText from "@material-ui/core/ListItemText"
 import { NavLink } from "react-router-dom"
 
 class NavigationItem extends React.PureComponent {
-  render() {
+  render () {
     const { name, to, icon: Icon } = this.props
 
     return (
