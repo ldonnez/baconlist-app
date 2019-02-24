@@ -25,6 +25,7 @@ import { normalizedDate } from "utils"
 
 import { actions } from "app/redux/lists/lists.actions"
 import * as selectors from "app/redux/lists/lists.selectors"
+import { getCurrentUser } from "app/redux/authorization/authorization.selectors"
 
 class ListCard extends React.PureComponent {
   state = {
@@ -90,7 +91,7 @@ class ListCard extends React.PureComponent {
   }
 
   render () {
-  	const { list, onChange, expanded } = this.props
+  	const { list, onChange, currentUser, expanded } = this.props
   	const tasks = list.tasks
   	return (
   		<StyledCard raised>
@@ -112,7 +113,9 @@ class ListCard extends React.PureComponent {
   							onClose={this.handleCloseActionMenu}
   						>
   							<MenuList>
-  								<MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
+  								{ currentUser.ID === list.user_id &&
+  									<MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
+  								}
   							</MenuList>
   						</ActionMenu>
   					</React.Fragment>
@@ -195,7 +198,8 @@ class ListCard extends React.PureComponent {
 const mapStateToProps = state => {
 	return {
 		tasksTodo: id => selectors.getTodoTasksFromList(state, id),
-		tasksCompleted: id => selectors.getCompletedTasksFromList(state, id)
+		tasksCompleted: id => selectors.getCompletedTasksFromList(state, id),
+		currentUser: getCurrentUser(state)
 	}
 }
 
