@@ -10,26 +10,26 @@ import CssBaseline from "@material-ui/core/CssBaseline"
 import navigationItems from "../../navigationItems"
 
 export class Layout extends React.PureComponent {
-  render () {
-    const { children, component: Component, ...rest } = this.props
-    return (
-      <Route
-        {...rest}
-        render={matchProps => (
-          <ApplicationContainer>
-            <CssBaseline />
-            <AppBar />
-            <Drawer navigationItems={navigationItems} />
-            <ContentContainer>
-              <Toolbar />
-              <Component {...matchProps} />
-            </ContentContainer>
-            <BottomNavigation navigationItems={navigationItems} />
-          </ApplicationContainer>
-        )}
-      />
-    )
-  }
+	render () {
+		const { children, component: Component, ...rest } = this.props
+		return (
+			<Route
+				{...rest}
+				render={matchProps => (
+					<ApplicationContainer>
+						<CssBaseline />
+						<AppBar />
+						<Drawer navigationItems={navigationItems} />
+						<ContentContainer>
+							<Toolbar />
+							<Component {...matchProps} />
+						</ContentContainer>
+						<BottomNavigation navigationItems={navigationItems} />
+					</ApplicationContainer>
+				)}
+			/>
+		)
+	}
 }
 
 export default Layout

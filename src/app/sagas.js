@@ -4,8 +4,8 @@ import authorizationSaga from "./redux/authorization/authorization.saga"
 import listsSaga from "./redux/lists/lists.saga"
 
 export default [
-  usersSaga,
-  authenticationSaga,
-  authorizationSaga,
-  listsSaga
+	usersSaga,
+	authenticationSaga,
+	authorizationSaga,
+	listsSaga
 ]
