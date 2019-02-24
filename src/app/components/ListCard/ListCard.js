@@ -21,6 +21,7 @@ import ConfirmationDialog from "components/ConfirmationDialog"
 import Task from "../Task"
 import TaskField from "../TaskField"
 import { StyledCard } from "./style"
+import Description from "./components/Description"
 import { normalizedDate } from "utils"
 
 import { actions } from "app/redux/lists/lists.actions"
@@ -98,6 +99,7 @@ class ListCard extends React.PureComponent {
   render () {
   	const { list, onChange, currentUser, expanded } = this.props
   	const tasks = list.tasks
+  	const due_to = normalizedDate(list.due_to)
   	return (
   		<StyledCard raised>
   			<CardHeader
