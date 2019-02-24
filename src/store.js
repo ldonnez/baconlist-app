@@ -12,9 +12,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const middlewares = [routerMiddleware(history), sagaMiddleware]
 
-const composedMiddlewares = composeWithDevTools(
-	applyMiddleware(...middlewares)
-)
+const composedMiddlewares = composeWithDevTools(applyMiddleware(...middlewares))
 
 const store = createStore(rootReducer(history), composedMiddlewares)
 

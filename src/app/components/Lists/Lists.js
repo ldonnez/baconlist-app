@@ -66,7 +66,5 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Lists)
+export default connect(mapStateToProps,
+	mapDispatchToProps)(Lists)

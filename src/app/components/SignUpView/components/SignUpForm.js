@@ -90,7 +90,5 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(memo(SignUpForm))
+export default connect(mapStateToProps,
+	mapDispatchToProps)(memo(SignUpForm))

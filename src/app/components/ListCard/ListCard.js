@@ -214,7 +214,5 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(ListCard)
+export default connect(mapStateToProps,
+	mapDispatchToProps)(ListCard)

@@ -1,22 +1,20 @@
 import { createTypes, actionCreator } from "redux-action-creator"
 
-export const types = createTypes(
-	[
-		"POST",
-		"POST_SUCCESS",
-		"POST_FAIL",
-		"PATCH",
-		"PATCH_SUCCESS",
-		"PATCH_FAIL",
-		"DELETE",
-		"DELETE_SUCCESS",
-		"DELETE_FAIL",
-		"GET",
-		"GET_SUCCESS",
-		"GET_FAIL"
-	],
-	"LISTS"
-)
+export const types = createTypes([
+	"POST",
+	"POST_SUCCESS",
+	"POST_FAIL",
+	"PATCH",
+	"PATCH_SUCCESS",
+	"PATCH_FAIL",
+	"DELETE",
+	"DELETE_SUCCESS",
+	"DELETE_FAIL",
+	"GET",
+	"GET_SUCCESS",
+	"GET_FAIL"
+],
+"LISTS")
 
 export const actions = {
 	get: actionCreator(types.GET),

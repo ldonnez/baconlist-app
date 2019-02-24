@@ -25,15 +25,11 @@ describe("Should successfully authenticate", () => {
 	})
 
 	it("should call storeToken", () => {
-		expect(gen.next(response).value).toEqual(
-			call(token.storeToken, response.data)
-		)
+		expect(gen.next(response).value).toEqual(call(token.storeToken, response.data))
 	})
 
 	it("should call authenticateSuccess", () => {
-		expect(gen.next(response).value).toEqual(
-			put(actions.authenticateSuccess())
-		)
+		expect(gen.next(response).value).toEqual(put(actions.authenticateSuccess()))
 	})
 
 	it("should redirect to /lists", () => {
@@ -55,16 +51,12 @@ describe("Should fail authentication", () => {
 	})
 
 	it("should call authenticateFail", () => {
-		expect(gen.throw("error").value).toEqual(
-			put(
-				actions.authenticateFail({
-					errors: {
-						password: "E-mail or password is incorrect",
-						email: "E-mail or password is incorrect"
-					}
-				})
-			)
-		)
+		expect(gen.throw("error").value).toEqual(put(actions.authenticateFail({
+			errors: {
+				password: "E-mail or password is incorrect",
+				email: "E-mail or password is incorrect"
+			}
+		})))
 	})
 
 	it("should be done", () => {

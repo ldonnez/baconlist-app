@@ -16,9 +16,7 @@ describe("Should successfully authorize with valid access token", () => {
 	const gen = authorizationFlow(action)
 
 	it("should call isAccessTokenExpired", () => {
-		expect(gen.next(action).value).toEqual(
-			call(token.isAccessTokenExpired, payload.accessToken)
-		)
+		expect(gen.next(action).value).toEqual(call(token.isAccessTokenExpired, payload.accessToken))
 	})
 
 	it("should call authorized", () => {
@@ -53,9 +51,7 @@ describe("Should successfully refresh token", () => {
 	}
 
 	it("should call isAccessTokenExpired", () => {
-		expect(gen.next(action).value).toEqual(
-			call(token.isAccessTokenExpired, payload.accessToken)
-		)
+		expect(gen.next(action).value).toEqual(call(token.isAccessTokenExpired, payload.accessToken))
 	})
 
 	it("should call refreshToken", () => {
@@ -63,9 +59,7 @@ describe("Should successfully refresh token", () => {
 	})
 
 	it("should call storeToken", () => {
-		expect(gen.next(response).value).toEqual(
-			call(token.storeToken, response.data)
-		)
+		expect(gen.next(response).value).toEqual(call(token.storeToken, response.data))
 	})
 
 	it("should call refreshTokenSuccess", () => {
