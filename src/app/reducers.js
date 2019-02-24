@@ -7,5 +7,5 @@ export default {
 	users: usersReducer,
 	authentication: authenticationReducer,
 	authorization: authorizationReducer,
-  lists: listsReducer
+	lists: listsReducer
 }

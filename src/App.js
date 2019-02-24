@@ -14,42 +14,42 @@ import theme from "./theme"
 
 const generateClassName = createGenerateClassName()
 const jss = create({
-  ...jssPreset(),
-  insertionPoint: document.getElementById("jss-insertion-point")
+	...jssPreset(),
+	insertionPoint: document.getElementById("jss-insertion-point")
 })
 
 class App extends Component {
-  render () {
-    return (
-      <JssProvider jss={jss} generateClassName={generateClassName}>
-        <MuiThemeProvider theme={theme}>
-          <Provider store={store}>
-            <ConnectedRouter history={history}>
-              <Switch>
-                {routes.map(({ path, authorized, component, ...rest }) => {
-                  return authorized ? (
-                    <DefaultLayout
-                      key={path}
-                      path={path}
-                      component={withAuthorization(component)}
-                      {...rest}
-                    />
-                  ) : (
-                    <Route
-                      key={path}
-                      path={path}
-                      component={component}
-                      {...rest}
-                    />
-                  )
-                })}
-              </Switch>
-            </ConnectedRouter>
-          </Provider>
-        </MuiThemeProvider>
-      </JssProvider>
-    )
-  }
+	render () {
+		return (
+			<JssProvider jss={jss} generateClassName={generateClassName}>
+				<MuiThemeProvider theme={theme}>
+					<Provider store={store}>
+						<ConnectedRouter history={history}>
+							<Switch>
+								{routes.map(({ path, authorized, component, ...rest }) => {
+									return authorized ? (
+										<DefaultLayout
+											key={path}
+											path={path}
+											component={withAuthorization(component)}
+											{...rest}
+										/>
+									) : (
+										<Route
+											key={path}
+											path={path}
+											component={component}
+											{...rest}
+										/>
+									)
+								})}
+							</Switch>
+						</ConnectedRouter>
+					</Provider>
+				</MuiThemeProvider>
+			</JssProvider>
+		)
+	}
 }
 
 export default App
