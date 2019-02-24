@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
 	case types.POST_SUCCESS:
 		return {
 			...state,
-      errors: null,
+			errors: null,
 			isLoading: false
 		}
 
@@ -40,7 +40,7 @@ export default (state = initialState, action) => {
 		return {
 			...state,
 			isLoading: false,
-      data: action.payload.data
+			data: action.payload.data
 		}
 
 	case types.GET_FAIL:
@@ -59,7 +59,7 @@ export default (state = initialState, action) => {
 	case types.PATCH_SUCCESS:
 		return {
 			...state,
-      data: updateList(state.data, action.payload.data),
+			data: updateList(state.data, action.payload.data),
 			isLoading: false
 		}
 
@@ -70,20 +70,38 @@ export default (state = initialState, action) => {
 			errors: action.payload.errors
 		}
 
+	case types.DELETE:
+		return {
+			...state,
+			isLoading: true,
+		}
+
+	case types.DELETE_SUCCESS:
+		return {
+			...state,
+			isLoading: false
+		}
+
+	case types.DELETE_FAIL:
+		return {
+			...state,
+			isLoading: false,
+			errors: action.payload.errors
+		}
 	default:
 		return state
 	}
 }
 
 function updateList (lists, updatedList) {
-  return lists.map((list, index) => {
-    if (list.id!== updatedList.id) {
-      return list
-    }
+	return lists.map((list, index) => {
+		if (list.id!== updatedList.id) {
+			return list
+		}
 
-    return {
-      ...list,
-      ...updatedList
-    }
-  })
+		return {
+			...list,
+			...updatedList
+		}
+	})
 }
