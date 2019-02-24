@@ -12,7 +12,8 @@ export const types = createTypes([
 	"DELETE_FAIL",
 	"GET",
 	"GET_SUCCESS",
-	"GET_FAIL"
+	"GET_FAIL",
+	"EDIT"
 ],
 "LISTS")
 
@@ -31,5 +32,7 @@ export const actions = {
 
 	delete: actionCreator(types.DELETE, "id"),
 	deleteSuccess: actionCreator(types.DELETE_SUCCESS),
-	deleteFail: actionCreator(types.DELETE_FAIL, "errors")
+	deleteFail: actionCreator(types.DELETE_FAIL, "errors"),
+
+	onEdit: actionCreator(types.EDIT, "id")
 }

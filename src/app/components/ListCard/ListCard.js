@@ -71,6 +71,11 @@ class ListCard extends React.PureComponent {
   	this.setState({ openActionMenu: false, anchorEl: null, openConfirmationDialog: true })
   }
 
+  handleOnEditList = () => {
+  	const { onEdit, list } = this.props
+  	onEdit({ id: list.id })
+  }
+
   handleToggleActionMenu = event => {
   	const { currentTarget } = event
   	this.setState(state => ({ openActionMenu: !state.openActionMenu, anchorEl: currentTarget }))
@@ -106,26 +111,27 @@ class ListCard extends React.PureComponent {
   						<IconButton onClick={this.handleToggleActionMenu}>
   							<MoreVertIcon />
   						</IconButton>
-  						<ActionMenu
-  							open={this.state.openActionMenu}
-  							anchor={this.state.anchorEl}
-  							placement="bottom-end"
-  							onClose={this.handleCloseActionMenu}
-  						>
-  							<MenuList>
-  								{ currentUser.ID === list.user_id &&
-  									<MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
-  								}
-  							</MenuList>
-  						</ActionMenu>
+  						{ currentUser.ID === list.user_id &&
+								<ActionMenu
+									open={this.state.openActionMenu}
+									anchor={this.state.anchorEl}
+									placement="bottom-end"
+									onClose={this.handleCloseActionMenu}
+								>
+									<MenuList>
+										<MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
+										<MenuItem onClick={this.handleOnEditList}>Edit</MenuItem>
+									</MenuList>
+								</ActionMenu>
+  						}
   					</React.Fragment>
   				}
   				title={list.name}
-  				subheader={normalizedDate(list.due_to)}
+  				subheader={due_to ? due_to : "No due date"}
   			/>
 
   			<CardContent>
-  				<Typography component="p">{list.description}</Typography>
+  				<Description>{list.description}</Description>
   			</CardContent>
   			<CardActions disableActionSpacing>
   				<IconButton
@@ -210,6 +216,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		deleteLists: id => {
 			dispatch(actions.delete(id))
+		},
+		onEdit: id => {
+			dispatch(actions.onEdit(id))
 		}
 	}
 }

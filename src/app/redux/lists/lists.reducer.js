@@ -5,7 +5,8 @@ const initialState = {
 	data: null,
 	isLoading: false,
 	errors: null,
-	meta: null
+	meta: null,
+	editId: null
 }
 
 export default (state = initialState, action) => {
@@ -88,6 +89,13 @@ export default (state = initialState, action) => {
 			isLoading: false,
 			errors: action.payload.errors
 		}
+
+	case types.EDIT:
+		return {
+			...state,
+			editId: action.payload.id
+		}
+
 	default:
 		return state
 	}
