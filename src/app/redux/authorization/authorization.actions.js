@@ -1,16 +1,14 @@
 import { createTypes, actionCreator } from "redux-action-creator"
 
-export const types = createTypes(
-	[
-		"AUTHORIZE",
-		"AUTHORIZE_SUCCESS",
-		"AUTHORIZE_FAIL",
-		"REFRESH_TOKEN",
-		"REFRESH_TOKEN_SUCCESS",
-		"REFRESH_TOKEN_FAIL"
-	],
-	"AUTHORIZATION"
-)
+export const types = createTypes([
+	"AUTHORIZE",
+	"AUTHORIZE_SUCCESS",
+	"AUTHORIZE_FAIL",
+	"REFRESH_TOKEN",
+	"REFRESH_TOKEN_SUCCESS",
+	"REFRESH_TOKEN_FAIL"
+],
+"AUTHORIZATION")
 
 export const actions = {
 	authorize: actionCreator(types.AUTHORIZE, "accessToken", "refreshToken"),

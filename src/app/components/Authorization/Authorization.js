@@ -25,19 +25,15 @@ const withAuthorization = WrappedComponent => {
 	const mapDispatchToProps = dispatch => {
 		return {
 			authorize: data =>
-				dispatch(
-					actions.authorize({
-						accessToken: data.accessToken,
-						refreshToken: data.refreshToken
-					})
-				)
+				dispatch(actions.authorize({
+					accessToken: data.accessToken,
+					refreshToken: data.refreshToken
+				}))
 		}
 	}
 
-	return connect(
-		mapStateToProps,
-		mapDispatchToProps
-	)(Authorization)
+	return connect(mapStateToProps,
+		mapDispatchToProps)(Authorization)
 }
 
 export default withAuthorization

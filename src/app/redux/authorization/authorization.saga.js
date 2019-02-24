@@ -6,10 +6,8 @@ import { push } from "connected-react-router"
 
 export function* authorizationFlow (action) {
 	try {
-		const isExpired = yield call(
-			token.isAccessTokenExpired,
-			action.payload.accessToken
-		)
+		const isExpired = yield call(token.isAccessTokenExpired,
+			action.payload.accessToken)
 		if (isExpired) {
 			yield* refreshTokenFlow(action)
 		}

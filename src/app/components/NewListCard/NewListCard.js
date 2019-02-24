@@ -168,7 +168,5 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(memo(NewListCard))
+export default connect(mapStateToProps,
+	mapDispatchToProps)(memo(NewListCard))
