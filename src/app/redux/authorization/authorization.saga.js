@@ -13,7 +13,7 @@ export function* authorizationFlow (action) {
 		if (isExpired) {
 			yield* refreshTokenFlow(action)
 		}
-		yield put(actions.authorizeSuccess())
+		yield put(actions.authorizeSuccess({ user: action.payload.accessToken }))
 	} catch (e) {
 		yield put(actions.authorizeFail({ errors: e }))
 		yield put(push("/signin"))
