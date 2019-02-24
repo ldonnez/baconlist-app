@@ -3,6 +3,7 @@ import { types } from "./authorization.actions"
 const initialState = {
 	loading: false,
 	authorized: false,
+	user: null,
 	errors: null
 }
 
@@ -19,7 +20,8 @@ export default (state = initialState, action) => {
 			...state,
 			loading: false,
 			errors: null,
-			authorized: true
+			authorized: true,
+			user: action.payload.user
 		}
 
 	case types.AUTHORIZATE_FAIL:

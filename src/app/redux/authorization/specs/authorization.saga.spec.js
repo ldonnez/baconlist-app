@@ -22,7 +22,7 @@ describe("Should successfully authorize with valid access token", () => {
 	})
 
 	it("should call authorized", () => {
-		expect(gen.next().value).toEqual(put(actions.authorizeSuccess()))
+		expect(gen.next().value).toEqual(put(actions.authorizeSuccess({ user: payload.accessToken })))
 	})
 
 	it("should be done", () => {
@@ -73,7 +73,7 @@ describe("Should successfully refresh token", () => {
 	})
 
 	it("should call authorized", () => {
-		expect(gen.next().value).toEqual(put(actions.authorizeSuccess()))
+		expect(gen.next().value).toEqual(put(actions.authorizeSuccess({ user: payload.accessToken })))
 	})
 
 	it("should be done", () => {

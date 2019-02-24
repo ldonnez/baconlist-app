@@ -15,7 +15,7 @@ export const types = createTypes(
 export const actions = {
 	authorize: actionCreator(types.AUTHORIZE, "accessToken", "refreshToken"),
 	authorizeFail: actionCreator(types.AUTHORIZE_FAIL, "errors"),
-	authorizeSuccess: actionCreator(types.AUTHORIZE_SUCCESS),
+	authorizeSuccess: actionCreator(types.AUTHORIZE_SUCCESS, "user"),
 	refreshToken: actionCreator(types.REFRESH_TOKEN, "refreshToken"),
 	refreshTokenSuccess: actionCreator(types.REFRESH_TOKEN_SUCCESS),
 	refreshTokenFail: actionCreator(types.REFRESH_TOKEN_FAIL, "errors")
