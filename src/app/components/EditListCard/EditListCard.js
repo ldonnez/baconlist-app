@@ -126,7 +126,7 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
               			<Row key={`${list.id}-${i}-${task.name}`}>
               				<Column lg={12} md={12} xs={12}>
               					<Task
-													created
+              						created
               						name={task.name}
               						index={i}
           								onDelete={handleOnDeleteTask}
