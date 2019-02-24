@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import ListCard from "../ListCard"
+import EditListCard from "../EditListCard"
 import Row from "components/Row"
 import Column from "components/Column"
 import LoadingIndicator from "components/LoadingIndicator"
@@ -21,12 +22,19 @@ class Lists extends React.PureComponent {
   }
 
   render () {
-  	const { lists, loading } = this.props
+  	const { lists, editId, loading } = this.props
   	return (
   		<React.Fragment>
   			<Row>
   				{lists &&
             lists.map(l => {
+            	if (l.id === editId) {
+            		return ( 
+            		<Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
+            				<EditListCard list={l} />
+            		</Column>
+            		)
+            	} else {
             	return (
             		<Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
             			<ListCard
@@ -36,6 +44,7 @@ class Lists extends React.PureComponent {
             			/>
             		</Column>
             	)
+            	}
             })}
   			</Row>
   			{loading && (
@@ -62,6 +71,7 @@ const mapStateToProps = state => {
 	return {
 		errors: selectors.getErrors(state),
 		loading: selectors.isLoading(state),
+		editId: selectors.getEditId(state),
 		lists: selectors.getLists(state)
 	}
 }
