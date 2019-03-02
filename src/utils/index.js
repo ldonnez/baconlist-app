@@ -1,1 +1,1 @@
-export { normalizedDate } from "./date"
+export { normalizedDate, dateToISO } from "./date"

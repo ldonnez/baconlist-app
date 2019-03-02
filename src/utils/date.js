@@ -1,6 +1,9 @@
 export const normalizedDate = date => {
 	if (date && isValidDate(date)) {
-		return new Date(date).toDateString()
+		return dateToISO(date).split("T")[0]
+	}
+}
+
 export const dateToISO = (dateString) => {
 	if (dateString) {
 		const d = new Date(dateString)
