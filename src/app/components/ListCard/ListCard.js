@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 
 import Typography from "@material-ui/core/Typography"
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import CardHeader from "@material-ui/core/CardHeader"
 import CardContent from "@material-ui/core/CardContent"
 import CardActions from "@material-ui/core/CardActions"
 import Collapse from "@material-ui/core/Collapse"
@@ -20,9 +19,9 @@ import ConfirmationDialog from "components/ConfirmationDialog"
 
 import Task from "../Task"
 import TaskField from "../TaskField"
-import { StyledCard } from "./style"
+import { StyledCard, StyledCardHeader, StyledCardContent } from "./style"
 import Description from "./components/Description"
-import { normalizedDate } from "utils"
+import Tags from "./components/Tags"
 
 import { actions } from "app/redux/lists/lists.actions"
 import * as selectors from "app/redux/lists/lists.selectors"
@@ -99,10 +98,9 @@ class ListCard extends React.PureComponent {
   render () {
   	const { list, onChange, currentUser, expanded } = this.props
   	const tasks = list.tasks
-  	const due_to = normalizedDate(list.due_to)
   	return (
   		<StyledCard raised>
-  			<CardHeader
+  			<StyledCardHeader
   				avatar={
   					<Avatar aria-label="List">
   						{list.name.charAt(0).toUpperCase()}
@@ -129,12 +127,12 @@ class ListCard extends React.PureComponent {
   					</React.Fragment>
   				}
   				title={list.name}
-  				subheader={due_to ? due_to : "No due date"}
+  				subheader={list.due_to ? list.due_to : "No due date"}
   			/>
-
-  			<CardContent>
+  			<StyledCardContent>
+  				<Tags tags={list.tags} />
   				<Description>{list.description}</Description>
-  			</CardContent>
+  			</StyledCardContent>
   			<CardActions disableActionSpacing>
   				<IconButton
   					onClick={onChange(list.id)}

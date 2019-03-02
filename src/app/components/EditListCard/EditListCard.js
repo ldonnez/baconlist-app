@@ -15,12 +15,14 @@ import TextField from "components/TextField"
 import Row from "components/Row"
 import Column from "components/Column"
 import useValidator from "components/Hooks/validator"
+import MultiCreateableSelect from "components/MultiCreateableSelect"
 import TaskField from "../TaskField"
 import Task from "../Task"
 
 import validations from "./validations"
 import { actions as listActions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
+
 
 function EditListCard ({ patchList, errors, loading, onEdit, list }) {
 	const [formData, setFormData] = useState({ ...list })
@@ -56,6 +58,10 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
 		}
 	}
 
+	const handleOnTagChange = value => {
+		setFormData({ ...formData, tags: value })
+	}
+	console.log("DUE_TO: ", new Date(formData.due_to).toLocaleDateString())
 	return (
 		<Card>
 			<CardHeader
@@ -94,6 +100,11 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
 			</CardContent>
 			<Divider />
 			<CardContent>
+				<Row margin={4}>
+					<Column xs={12} lg={12} md={12}>
+						<MultiCreateableSelect onChange={handleOnTagChange} value={formData.tags} options={formData.tags} placeholder="Tags" />
+					</Column>
+				</Row>
 				<Row>
 					<Column xs={12} lg={12} md={12}>
 						<TextField

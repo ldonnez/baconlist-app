@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 
 import Button from "@material-ui/core/Button"
 import Divider from "@material-ui/core/Divider"
-import Card from "@material-ui/core/Card"
 import CardHeader from "@material-ui/core/CardHeader"
 import CardContent from "@material-ui/core/CardContent"
 import CardActions from "@material-ui/core/CardActions"
@@ -16,17 +15,21 @@ import Column from "components/Column"
 import useValidator from "components/Hooks/validator"
 import TaskField from "../TaskField"
 import Task from "../Task"
+import MultiCreateableSelect from "components/MultiCreateableSelect"
 
 import validations from "./validations"
 import { actions as listActions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
+
+import { StyledCard } from "./style.js"
 
 function NewListCard ({ postList, errors, loading, onClose }) {
 	const [formData, setFormData] = useState({
 		name: "",
 		due_to: "",
 		description: "",
-		tasks: []
+		tasks: [],
+		tags: []
 	})
 	const validationErrors = useValidator(formData, errors, validations)
 	const handleOnChange = event => {
@@ -57,8 +60,12 @@ function NewListCard ({ postList, errors, loading, onClose }) {
 		}
 	}
 
+	const handleOnTagChange = value => {
+		setFormData({ ...formData, tags: [ ...value ] })
+	}
+
 	return (
-		<Card>
+		<StyledCard>
 			<CardHeader
 				avatar={
 					<Avatar aria-label="List">
@@ -95,6 +102,11 @@ function NewListCard ({ postList, errors, loading, onClose }) {
 			</CardContent>
 			<Divider />
 			<CardContent>
+				<Row margin={4}>
+					<Column xs={12} lg={12} md={12}>
+						<MultiCreateableSelect onChange={handleOnTagChange} value={formData.tags} options={formData.tags} placeholder="Tags" />
+					</Column>
+				</Row>
 				<Row>
 					<Column xs={12} lg={12} md={12}>
 						<TextField
@@ -149,7 +161,7 @@ function NewListCard ({ postList, errors, loading, onClose }) {
           Cancel
 				</Button>
 			</CardActions>
-		</Card>
+		</StyledCard>
 	)
 }
 
