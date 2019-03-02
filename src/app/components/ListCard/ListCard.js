@@ -21,7 +21,7 @@ import Task from "../Task"
 import TaskField from "../TaskField"
 import { StyledCard, StyledCardHeader, StyledCardContent } from "./style"
 import Description from "./components/Description"
-import Tags from "./components/Tags"
+import TagChips from "./components/TagChips"
 
 import { actions } from "app/redux/lists/lists.actions"
 import * as selectors from "app/redux/lists/lists.selectors"
@@ -130,7 +130,7 @@ class ListCard extends React.PureComponent {
           subheader={list.due_to ? list.due_to : "No due date"}
         />
         <StyledCardContent>
-          <Tags tags={list.tags} />
+          <TagChips tags={list.tags} />
           <Description>{list.description}</Description>
         </StyledCardContent>
         <CardActions disableActionSpacing>
