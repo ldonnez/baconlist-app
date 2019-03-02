@@ -24,7 +24,7 @@
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "object-curly-spacing": ["error", "always"],
     "space-before-function-paren": ["error", "always"],
-    "indent": ["error", "tab"],
+    "indent": ["error", 2],
 		"function-paren-newline": ["error", { "minItems": 6 }]
   }
 }

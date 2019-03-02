@@ -25,103 +25,103 @@ import * as selectors from "../../redux/lists/lists.selectors"
 
 
 function EditListCard ({ patchList, errors, loading, onEdit, list }) {
-	const [formData, setFormData] = useState({ ...list })
-	const validationErrors = useValidator(formData, errors, validations)
+  const [formData, setFormData] = useState({ ...list })
+  const validationErrors = useValidator(formData, errors, validations)
 
-	const handleOnChange = event => {
-		setFormData({ ...formData, [event.target.name]: event.target.value })
-	}
+  const handleOnChange = event => {
+    setFormData({ ...formData, [event.target.name]: event.target.value })
+  }
 
-	const handleOnCancel = () => {
-		onEdit({ id: null })
-	}
+  const handleOnCancel = () => {
+    onEdit({ id: null })
+  }
 
-	const handleOnTaskAdd = value => {
+  const handleOnTaskAdd = value => {
   	const tasks = formData.tasks
   	const newTask = { name: value, completed: "false" }
   	const newTasks = tasks ? [...tasks, newTask] : [newTask]
   	setFormData({ ...formData, tasks: newTasks })
-	}
+  }
 
-	const handleOnDeleteTask = index => {
-		setFormData({
-			...formData,
-			tasks: formData.tasks.filter((task, i) => i !== index)
-		})
-	}
+  const handleOnDeleteTask = index => {
+    setFormData({
+      ...formData,
+      tasks: formData.tasks.filter((task, i) => i !== index)
+    })
+  }
 
-	const handleOnSave = event => {
-		event.preventDefault()
-		patchList({ data: formData })
-		if (!loading) {
-			onEdit({ id: null })
-		}
-	}
+  const handleOnSave = event => {
+    event.preventDefault()
+    patchList({ data: formData })
+    if (!loading) {
+      onEdit({ id: null })
+    }
+  }
 
-	const handleOnTagChange = value => {
-		setFormData({ ...formData, tags: value })
-	}
-	console.log("DUE_TO: ", new Date(formData.due_to).toLocaleDateString())
-	return (
-		<Card>
-			<CardHeader
-				avatar={
-					<Avatar aria-label="List">
-						{formData.name && formData.name.charAt(0).toUpperCase()}
-					</Avatar>
-				}
-				title={
-					<TextField
-						id="name"
-						label="Name"
-						name="name"
-						value={formData.name}
-						onChange={handleOnChange}
-						errors={validationErrors && validationErrors["name"]}
-					/>
-				}
-				subheader={
-					<TextField
-						id="dueTo"
-						type="date"
-						label="Due to"
-						name="due_to"
-						value={formData.due_to}
-						onChange={handleOnChange}
-						errors={validationErrors && validationErrors["due_to"]}
-						InputLabelProps={{
-							shrink: true
-						}}
-					/>
-				}
-			/>
-			<CardContent>
-				<Column />
-			</CardContent>
-			<Divider />
-			<CardContent>
-				<Row margin={4}>
-					<Column xs={12} lg={12} md={12}>
-						<MultiCreateableSelect onChange={handleOnTagChange} value={formData.tags} options={formData.tags} placeholder="Tags" />
-					</Column>
-				</Row>
-				<Row>
-					<Column xs={12} lg={12} md={12}>
-						<TextField
-							fullWidth
-							id="description"
-							label="Description"
-							multiline
-							rows="2"
-							rowsMax="4"
-							variant="outlined"
-							name="description"
-							value={formData.description}
-							onChange={handleOnChange}
-							errors={validationErrors && validationErrors["description"]}
-						/>
-					</Column>
-				</Row>
+  const handleOnTagChange = value => {
+    setFormData({ ...formData, tags: value })
+  }
+  console.log("DUE_TO: ", new Date(formData.due_to).toLocaleDateString())
+  return (
+    <Card>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="List">
+            {formData.name && formData.name.charAt(0).toUpperCase()}
+          </Avatar>
+        }
+        title={
+          <TextField
+            id="name"
+            label="Name"
+            name="name"
+            value={formData.name}
+            onChange={handleOnChange}
+            errors={validationErrors && validationErrors["name"]}
+          />
+        }
+        subheader={
+          <TextField
+            id="dueTo"
+            type="date"
+            label="Due to"
+            name="due_to"
+            value={formData.due_to}
+            onChange={handleOnChange}
+            errors={validationErrors && validationErrors["due_to"]}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        }
+      />
+      <CardContent>
+        <Column />
+      </CardContent>
+      <Divider />
+      <CardContent>
+        <Row margin={4}>
+          <Column xs={12} lg={12} md={12}>
+            <MultiCreateableSelect onChange={handleOnTagChange} value={formData.tags} options={formData.tags} placeholder="Tags" />
+          </Column>
+        </Row>
+        <Row>
+          <Column xs={12} lg={12} md={12}>
+            <TextField
+              fullWidth
+              id="description"
+              label="Description"
+              multiline
+              rows="2"
+              rowsMax="4"
+              variant="outlined"
+              name="description"
+              value={formData.description}
+              onChange={handleOnChange}
+              errors={validationErrors && validationErrors["description"]}
+            />
+          </Column>
+        </Row>
   					<Row margin={8}>
   						<Column lg={12} md={12} xs={12}>
   							<TaskField onAdd={handleOnTaskAdd} />
@@ -166,44 +166,44 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
               		)
               	)
               })}
-			</CardContent>
-			<Divider />
-			<CardActions>
-				<SubmitButton
-					type="submit"
-					variant="text"
-					size="large"
-					color="primary"
-					loading={loading}
-					onClick={handleOnSave}
-				>
+      </CardContent>
+      <Divider />
+      <CardActions>
+        <SubmitButton
+          type="submit"
+          variant="text"
+          size="large"
+          color="primary"
+          loading={loading}
+          onClick={handleOnSave}
+        >
           Save
-				</SubmitButton>
-				<Button onClick={handleOnCancel} size="large" color="primary">
+        </SubmitButton>
+        <Button onClick={handleOnCancel} size="large" color="primary">
           Cancel
-				</Button>
-			</CardActions>
-		</Card>
-	)
+        </Button>
+      </CardActions>
+    </Card>
+  )
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		patchList: data => {
-			dispatch(listActions.patch(data))
-		},
-		onEdit: id => {
-			dispatch(listActions.onEdit(id))
-		}
-	}
+  return {
+    patchList: data => {
+      dispatch(listActions.patch(data))
+    },
+    onEdit: id => {
+      dispatch(listActions.onEdit(id))
+    }
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		errors: selectors.getErrors(state),
-		loading: selectors.isLoading(state)
-	}
+  return {
+    errors: selectors.getErrors(state),
+    loading: selectors.isLoading(state)
+  }
 }
 
 export default connect(mapStateToProps,
-	mapDispatchToProps)(memo(EditListCard))
+  mapDispatchToProps)(memo(EditListCard))
