@@ -4,8 +4,8 @@ import authorizationReducer from "./redux/authorization/authorization.reducer"
 import listsReducer from "./redux/lists/lists.reducer"
 
 export default {
-	users: usersReducer,
-	authentication: authenticationReducer,
-	authorization: authorizationReducer,
-	lists: listsReducer
+  users: usersReducer,
+  authentication: authenticationReducer,
+  authorization: authorizationReducer,
+  lists: listsReducer
 }

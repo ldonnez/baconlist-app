@@ -60,21 +60,21 @@ class Lists extends React.PureComponent {
 }
 
 const mapDispatchToProps = dispatch => {
-	return {
-		getLists: fields => {
-			dispatch(actions.get())
-		}
-	}
+  return {
+    getLists: fields => {
+      dispatch(actions.get())
+    }
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		errors: selectors.getErrors(state),
-		loading: selectors.isLoading(state),
-		editId: selectors.getEditId(state),
-		lists: selectors.getLists(state)
-	}
+  return {
+    errors: selectors.getErrors(state),
+    loading: selectors.isLoading(state),
+    editId: selectors.getEditId(state),
+    lists: selectors.getLists(state)
+  }
 }
 
 export default connect(mapStateToProps,
-	mapDispatchToProps)(Lists)
+  mapDispatchToProps)(Lists)

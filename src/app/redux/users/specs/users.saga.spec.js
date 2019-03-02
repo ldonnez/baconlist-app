@@ -7,33 +7,33 @@ const data = { first_name: "test", last_name: "test", email: "test@test.com", pa
 const action =  actions.post({ data: data })
 
 describe("Should successfully POST", () => {
-	const gen = createUsersFlow(action)
+  const gen = createUsersFlow(action)
 
-	it("should call createUsers", () =>{
-		expect(gen.next(action).value).toEqual(call(api.createUsers, data))
-	})
+  it("should call createUsers", () =>{
+    expect(gen.next(action).value).toEqual(call(api.createUsers, data))
+  })
 
-	it("should call postSuccess", () =>{
-		expect(gen.next().value).toEqual(put(actions.postSuccess()))
-	})
+  it("should call postSuccess", () =>{
+    expect(gen.next().value).toEqual(put(actions.postSuccess()))
+  })
 
-	it("should be done", () =>{
-		expect(gen.next().done).toEqual(true)
-	})
+  it("should be done", () =>{
+    expect(gen.next().done).toEqual(true)
+  })
 })
 
 describe("Should fail authentication", () => {
-	const gen = createUsersFlow(action)
+  const gen = createUsersFlow(action)
 
-	it("should call createUsers", () =>{
-		expect(gen.next(action).value).toEqual(call(api.createUsers, data))
-	})
+  it("should call createUsers", () =>{
+    expect(gen.next(action).value).toEqual(call(api.createUsers, data))
+  })
 
-	it("should call postFail", () => {
-		expect(gen.throw({ response: { data: "error" } }).value).toEqual(put(actions.postFail({ errors: "error" })))
-	})
+  it("should call postFail", () => {
+    expect(gen.throw({ response: { data: "error" } }).value).toEqual(put(actions.postFail({ errors: "error" })))
+  })
 
-	it("should be done", () =>{
-		expect(gen.next().done).toEqual(true)
-	})
+  it("should be done", () =>{
+    expect(gen.next().done).toEqual(true)
+  })
 })

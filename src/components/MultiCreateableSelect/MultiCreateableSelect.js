@@ -11,17 +11,17 @@ import NoOptionsMessage from "./components/NoOptionsMessage"
 import ValueContainer from "./components/ValueContainer"
 
 const components = {
-	Control,
-	Menu,
-	MultiValue,
-	NoOptionsMessage,
-	Option,
-	ValueContainer,
+  Control,
+  Menu,
+  MultiValue,
+  NoOptionsMessage,
+  Option,
+  ValueContainer,
 }
 
 class AutoCompleteSelect extends React.Component {
 
-	render () {
+  render () {
   	const { onChange, value, placeholder, options, label } = this.props
 
   	return (
@@ -44,7 +44,7 @@ class AutoCompleteSelect extends React.Component {
   			</NoSsr>
   		</div>
   	)
-	}
+  }
 }
 
 export default AutoCompleteSelect
