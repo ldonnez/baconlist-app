@@ -29,7 +29,7 @@ class Lists extends React.PureComponent {
   				{lists &&
             lists.map(l => {
             	if (l.id === editId) {
-            		return ( 
+            		return (
             		<Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
             				<EditListCard list={l} />
             		</Column>

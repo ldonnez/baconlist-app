@@ -1,4 +1,4 @@
-import { createApiInstance, createProtectedApiInstance } from "../../api"
+import { createApiInstance, createProtectedApiInstance } from "api"
 import { getAccessToken } from "../localStorage/token"
 import axios from "axios"
 import { API_URL } from "./config"

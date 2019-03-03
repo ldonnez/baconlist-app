@@ -10,3 +10,7 @@ export const createProtectedApiInstance = (axios, url, token) => {
     headers: { Authorization: `Bearer ${token}` }
   })
 }
+
+export const createProtectedEventSource = (baseUrl, url, token) => {
+  return new EventSource(`${baseUrl}${url}?token=${token}`)
+}

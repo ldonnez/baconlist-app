@@ -1,5 +1,6 @@
 import React from "react"
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
+import { NavLink } from "react-router-dom"
 import { StyledBottomNavigation } from "./style"
 
 export default class BottomNavigation extends React.Component {
@@ -18,7 +19,7 @@ export default class BottomNavigation extends React.Component {
   		<StyledBottomNavigation value={value} onChange={this.handleChange}>
   			{navigationItems &&
           navigationItems.map(({ name, to, icon: Icon }) => (
-          	<BottomNavigationAction key={name} label={name} icon={<Icon />} />
+            <NavLink key={name} to={to}><BottomNavigationAction key={name} icon={<Icon />} /></NavLink>
           ))}
   		</StyledBottomNavigation>
   	)

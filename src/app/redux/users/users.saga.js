@@ -12,6 +12,17 @@ export function* createUsersFlow (action) {
   }
 }
 
+export function* getUsersByEmailFlow (action) {
+  try {
+    const { email } = action.payload
+    const response = yield call(api.getByEmail, email)
+    yield put(actions.getByEmailSuccess({ data: response && response.data }))
+  } catch (e) {
+    yield put(actions.getByEmailFail({ errors: e.response.data }))
+  }
+}
+
 export default function* usersSaga () {
   yield takeLatest(types.POST, createUsersFlow)
+  yield takeLatest(types.GET_BY_EMAIL, getUsersByEmailFlow)
 }

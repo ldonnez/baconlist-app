@@ -38,5 +38,14 @@ export default [
       loader: () => import("./Root"),
       loading: LoadingScreen
     })
+  },
+  {
+    path: "/friends",
+    exact: true,
+    authorized: true,
+    component: Loadable({
+      loader: () => import("./Friends"),
+      loading: LoadingScreen
+    })
   }
 ]
