@@ -17,45 +17,44 @@ class Lists extends React.PureComponent {
   }
 
   componentDidMount = () => {
-  	const { getLists } = this.props
-  	getLists()
+    const { getLists } = this.props
+    getLists()
   }
-
   render () {
-  	const { lists, editId, loading } = this.props
-  	return (
-  		<React.Fragment>
-  			<Row>
-  				{lists &&
+    const { lists, editId, loading } = this.props
+    return (
+      <React.Fragment>
+        <Row>
+          {lists &&
             lists.map(l => {
-            	if (l.id === editId) {
-            		return (
-            		<Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
-            				<EditListCard list={l} />
-            		</Column>
-            		)
-            	} else {
-            	return (
-            		<Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
-            			<ListCard
-            				list={l}
-            				onChange={this.handlePanelChange}
-            				expanded={this.state[l.id] && this.state[l.id]}
-            			/>
-            		</Column>
-            	)
-            	}
+              if (l.id === editId) {
+                return (
+                  <Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
+                    <EditListCard list={l} />
+                  </Column>
+                )
+              } else {
+                return (
+                  <Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
+                    <ListCard
+                      list={l}
+                      onChange={this.handlePanelChange}
+                      expanded={this.state[l.id] && this.state[l.id]}
+                    />
+                  </Column>
+                )
+              }
             })}
-  			</Row>
-  			{loading && (
-  				<Row>
-  					<Column lg={12} md={12} xs={12}>
-  						<LoadingIndicator />
-  					</Column>
-  				</Row>
-  			)}
-  		</React.Fragment>
-  	)
+        </Row>
+        {loading && (
+          <Row>
+            <Column lg={12} md={12} xs={12}>
+              <LoadingIndicator />
+            </Column>
+          </Row>
+        )}
+      </React.Fragment>
+    )
   }
 }
 
