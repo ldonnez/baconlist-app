@@ -7,6 +7,13 @@ export const getLists = () => {
   })
 }
 
+export const getListsShareWith = (id) => {
+  return baconListProtectedApi(`/me/lists/${id}/share_with`, {
+    method: "GET"
+  })
+}
+
+
 export const postLists = (values) => {
   return baconListProtectedApi("/me/lists", {
     method: "POST",
@@ -15,6 +22,7 @@ export const postLists = (values) => {
 }
 
 export const patchLists = (values) => {
+  console.log("VAL: ", values)
   return baconListProtectedApi(`/lists/${values.id}`, {
     method: "PATCH",
     data: serializedList(values)
