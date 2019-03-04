@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton"
 import MoreVertIcon from "@material-ui/icons/MoreVert"
 import MenuItem from "@material-ui/core/MenuItem"
 import MenuList from "@material-ui/core/MenuList"
+import ShareIcon from "@material-ui/icons/Share"
 
 import Row from "components/Row"
 import Column from "components/Column"
@@ -19,11 +20,14 @@ import ConfirmationDialog from "components/ConfirmationDialog"
 
 import Task from "../Task"
 import TaskField from "../TaskField"
+import ShareWithDialog from "../ShareWithDialog"
 import { StyledCard, StyledCardHeader, StyledCardContent } from "./style"
 import Description from "./components/Description"
 import TagChips from "./components/TagChips"
 
 import { actions } from "app/redux/lists/lists.actions"
+import { actions as listsShareWithActions }from "app/redux/listsShareWith/listsShareWith.actions"
+import { actions as friendsActions }from "app/redux/friends/friends.actions"
 import * as selectors from "app/redux/lists/lists.selectors"
 import { getCurrentUser } from "app/redux/authorization/authorization.selectors"
 
@@ -31,7 +35,8 @@ class ListCard extends React.PureComponent {
   state = {
     openActionMenu: false,
     anchorEl: null,
-    openConfirmationDialog: false
+    openConfirmationDialog: false,
+    openShareWithDialog: false
   };
 
   handleOnCompleteTask = index => {
@@ -95,6 +100,23 @@ class ListCard extends React.PureComponent {
     this.setState({ openConfirmationDialog: false })
   }
 
+  handleOpenShareWithDialog = () => {
+    const { list, getFriends, getListsShareWith } = this.props
+    getFriends()
+    getListsShareWith({ id: list.id })
+    this.setState({ openShareWithDialog: true })
+  }
+
+  handleCloseShareWithDialog = () => {
+    this.setState({ openShareWithDialog: false })
+  }
+
+  handleOnSaveShareWith = friends => {
+    const { list, updateLists } = this.props
+    const newList = { ...list, shared_with: friends }
+    updateLists({ data: newList })
+  }
+
   render () {
     const { list, onChange, currentUser, expanded } = this.props
     const tasks = list.tasks
@@ -108,21 +130,23 @@ class ListCard extends React.PureComponent {
           }
           action={
             <React.Fragment>
+              { currentUser.ID === list.user_id &&
+            <React.Fragment>
               <IconButton onClick={this.handleToggleActionMenu}>
                 <MoreVertIcon />
               </IconButton>
-              { currentUser.ID === list.user_id &&
-                <ActionMenu
-                  open={this.state.openActionMenu}
-                  anchor={this.state.anchorEl}
-                  placement="bottom-end"
-                  onClose={this.handleCloseActionMenu}
-                >
-                  <MenuList>
-                    <MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
-                    <MenuItem onClick={this.handleOnEditList}>Edit</MenuItem>
-                  </MenuList>
-                </ActionMenu>
+              <ActionMenu
+                open={this.state.openActionMenu}
+                anchor={this.state.anchorEl}
+                placement="bottom-end"
+                onClose={this.handleCloseActionMenu}
+              >
+                <MenuList>
+                  <MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
+                  <MenuItem onClick={this.handleOnEditList}>Edit</MenuItem>
+                </MenuList>
+              </ActionMenu>
+            </React.Fragment>
               }
             </React.Fragment>
           }
@@ -141,6 +165,11 @@ class ListCard extends React.PureComponent {
           >
             <ExpandMoreIcon />
           </IconButton>
+          { currentUser.ID === list.user_id &&
+          <IconButton onClick={this.handleOpenShareWithDialog}aria-label="Share">
+            <ShareIcon />
+          </IconButton>
+          }
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
@@ -196,6 +225,14 @@ class ListCard extends React.PureComponent {
           onConfirm={this.handleOnConfirmationDialog}
           text={`Are you sure you want to delete ${list.name}?`}
         />
+        { this.state.openShareWithDialog &&
+          <ShareWithDialog
+            listId={list.id}
+            open={this.state.openShareWithDialog}
+            onClose={this.handleCloseShareWithDialog}
+            onSave={this.handleOnSaveShareWith}
+          />
+        }
       </StyledCard>
     )
   }
@@ -219,9 +256,14 @@ const mapDispatchToProps = dispatch => {
     },
     onEdit: id => {
       dispatch(actions.onEdit(id))
+    },
+    getListsShareWith: id => {
+      dispatch(listsShareWithActions.get(id))
+    },
+    getFriends: fields => {
+      dispatch(friendsActions.get())
     }
   }
 }
 
-export default connect(mapStateToProps,
-  mapDispatchToProps)(ListCard)
+export default connect(mapStateToProps, mapDispatchToProps)(ListCard)
