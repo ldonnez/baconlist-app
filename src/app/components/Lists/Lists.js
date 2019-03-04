@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import ListCard from "../ListCard"
 import EditListCard from "../EditListCard"
+import NewListCard from "../NewListCard"
 import Row from "components/Row"
 import Column from "components/Column"
 import LoadingIndicator from "components/LoadingIndicator"
@@ -12,19 +13,27 @@ class Lists extends React.PureComponent {
   state = {}
 
   handlePanelChange = identifier => event => {
-  	const expanded = this.state[identifier] ? false : true
-  	this.setState({ [identifier]: expanded })
+    const expanded = this.state[identifier] ? false : true
+    this.setState({ [identifier]: expanded })
   }
 
   componentDidMount = () => {
     const { getLists } = this.props
     getLists()
   }
+
   render () {
     const { lists, editId, loading } = this.props
+    const { newList, onCancelNewList } = this.props
+
     return (
       <React.Fragment>
         <Row>
+          { newList &&
+             <Column spacing={8} lg={3} md={6} xs={12}>
+               <NewListCard onClose={onCancelNewList}/>
+             </Column>
+          }
           {lists &&
             lists.map(l => {
               if (l.id === editId) {
