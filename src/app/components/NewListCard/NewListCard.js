@@ -7,6 +7,7 @@ import CardHeader from "@material-ui/core/CardHeader"
 import CardContent from "@material-ui/core/CardContent"
 import CardActions from "@material-ui/core/CardActions"
 import Avatar from "@material-ui/core/Avatar"
+import Card from "@material-ui/core/Card"
 
 import SubmitButton from "components/SubmitButton"
 import TextField from "components/TextField"
@@ -20,8 +21,6 @@ import MultiCreateableSelect from "components/MultiCreateableSelect"
 import validations from "./validations"
 import { actions as listActions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
-
-import { StyledCard } from "./style.js"
 
 function NewListCard ({ postList, errors, loading, onClose }) {
   const [formData, setFormData] = useState({
@@ -65,7 +64,7 @@ function NewListCard ({ postList, errors, loading, onClose }) {
   }
 
   return (
-    <StyledCard>
+    <Card>
       <CardHeader
         avatar={
           <Avatar aria-label="List">
@@ -161,7 +160,7 @@ function NewListCard ({ postList, errors, loading, onClose }) {
           Cancel
         </Button>
       </CardActions>
-    </StyledCard>
+    </Card>
   )
 }
 
