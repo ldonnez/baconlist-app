@@ -12,7 +12,7 @@ export function* watchFriendRequests (action) {
         const payload = yield take(eventChannel)
         yield put(actions.getSuccess({ data: payload }))
       } catch(e) {
-		    yield put(actions.getFail({ errors: e }))
+        yield put(actions.getFail({ errors: e }))
         eventChannel.close()
       }
     }
