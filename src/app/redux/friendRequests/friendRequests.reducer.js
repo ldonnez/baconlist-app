@@ -2,7 +2,7 @@ import { types } from "./friendRequests.actions"
 
 
 const initialState = {
-  data: null,
+  data: [],
   isLoading: false,
   errors: null,
   listening: false,
@@ -49,13 +49,13 @@ export default (state = initialState, action) => {
     }
 
   case types.GET_SUCCESS:
-    return {
-      ...state,
-      isLoading: false,
-      stream: action.payload.start,
-      data: action.payload.data
+    if (state.data.length !== action.payload.data.length) {
+      return {
+        ...state,
+        data: action.payload.data
+      }
     }
-
+    return state
   case types.REFRESH:
     return {
       ...state,
