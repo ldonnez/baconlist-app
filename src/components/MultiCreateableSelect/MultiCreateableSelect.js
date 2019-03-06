@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types, react/jsx-handler-names */
 
-import React from "react"
+import React, { memo } from "react"
 import CreateableSelect from "react-select/lib/Creatable"
 import NoSsr from "@material-ui/core/NoSsr"
 import Control from "./components/Control"
@@ -19,32 +19,27 @@ const components = {
   ValueContainer,
 }
 
-class AutoCompleteSelect extends React.Component {
-
-  render () {
-  	const { onChange, value, placeholder, options, label } = this.props
-
-  	return (
-  		<div>
-  			<NoSsr>
-  				<CreateableSelect
-  					textFieldProps={{
-  						label: label,
-  						InputLabelProps: {
-  							shrink: true,
-  						},
-  					}}
-  					options={options}
-  					components={components}
-  					value={value}
-  					onChange={onChange}
-  					placeholder={placeholder}
-  					isMulti
-  				/>
-  			</NoSsr>
-  		</div>
-  	)
-  }
+function AutoCompleteSelect ({ onChange, value, placeholder, options, label }){
+  return (
+    <div>
+      <NoSsr>
+        <CreateableSelect
+          textFieldProps={{
+            label: label,
+            InputLabelProps: {
+              shrink: true,
+            },
+          }}
+          options={options}
+          components={components}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          isMulti
+        />
+      </NoSsr>
+    </div>
+  )
 }
 
-export default AutoCompleteSelect
+export default memo(AutoCompleteSelect)

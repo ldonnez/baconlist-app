@@ -1,27 +1,23 @@
-import React from "react"
+import React, { useState, memo } from "react"
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
 import { NavLink } from "react-router-dom"
 import { StyledBottomNavigation } from "./style"
 
-export default class BottomNavigation extends React.Component {
-  state = {
-  	value: 0
-  };
+function BottomNavigation ( { navigationItems } ){
+  const [value, setValue] = useState(0)
 
-  handleChange = (event, value) => {
-  	this.setState({ value })
-  };
+  const handleChange = (event, value) => {
+    setValue({ value })
+  }
 
-  render () {
-  	const { value } = this.state
-  	const { navigationItems } = this.props
-  	return (
-  		<StyledBottomNavigation value={value} onChange={this.handleChange}>
-  			{navigationItems &&
+  return (
+    <StyledBottomNavigation value={value} onChange={handleChange}>
+      {navigationItems &&
           navigationItems.map(({ name, to, icon: Icon }) => (
             <NavLink key={name} to={to}><BottomNavigationAction key={name} icon={<Icon />} /></NavLink>
           ))}
-  		</StyledBottomNavigation>
-  	)
-  }
+        </StyledBottomNavigation>
+  )
 }
+
+export default memo(BottomNavigation)
