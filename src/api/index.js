@@ -1,1 +1,1 @@
-export { createApiInstance, createProtectedApiInstance, createProtectedEventSource } from "./api"
+export { createApiInstance, createProtectedEventSource } from "./api"
