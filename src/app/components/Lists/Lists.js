@@ -24,7 +24,7 @@ function Lists ({ getLists, lists, editId, loading, newList, onCancelNewList }) 
 
   return (
     <React.Fragment>
-      <Row>
+      <Row id="new-list">
         { newList &&
              <Column spacing={8} lg={3} md={6} xs={12}>
                <NewListCard onClose={onCancelNewList}/>

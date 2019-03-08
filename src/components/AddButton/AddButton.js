@@ -1,17 +1,15 @@
 import React from "react"
 import AddIcon from "@material-ui/icons/Add"
-import Fab from "@material-ui/core/Fab"
+import { StyledFab } from "./style"
 
 export default function AddButton ({ onClick }) {
   return (
-    <Fab
-      size="small"
+    <StyledFab
       color="primary"
       aria-label="Add"
-      text="secondary"
       onClick={onClick}
     >
       <AddIcon />
-    </Fab>
+    </StyledFab>
   )
 }
