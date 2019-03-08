@@ -128,8 +128,8 @@ function ListCard ({ list, updateLists, onEdit, deleteLists, getListsShareWith, 
                 onClose={handleCloseActionMenu}
               >
                 <MenuList>
-                  <MenuItem onClick={handleOnDeleteList}>Delete</MenuItem>
                   <MenuItem onClick={handleOnEditList}>Edit</MenuItem>
+                  <MenuItem onClick={handleOnDeleteList}>Delete</MenuItem>
                 </MenuList>
               </ActionMenu>
             </React.Fragment>
