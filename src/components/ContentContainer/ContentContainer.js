@@ -8,6 +8,6 @@ export default styled("div")({
   [theme.breakpoints.down("sm")]: {
     padding: theme.spacing.unit,
     marginTop: "55px",
-    marginBottom: "55px"
+    marginBottom: "50px"
   }
 })

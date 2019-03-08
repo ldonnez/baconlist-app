@@ -1,23 +1,22 @@
 import React, { useState, memo } from "react"
+import { withRouter } from "react-router-dom"
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction"
-import { NavLink } from "react-router-dom"
 import { StyledBottomNavigation } from "./style"
 
-function BottomNavigation ( { navigationItems } ){
-  const [value, setValue] = useState(0)
+function BottomNavigation ( { navigationItems, history } ){
+  const [value] = useState(window.location.pathname === "/" ? "/lists" : window.location.pathname)
 
   const handleChange = (event, value) => {
-    setValue({ value })
+    history.push(value)
   }
 
   return (
     <StyledBottomNavigation value={value} onChange={handleChange}>
-      {navigationItems &&
-          navigationItems.map(({ name, to, icon: Icon }) => (
-            <NavLink key={name} to={to}><BottomNavigationAction key={name} icon={<Icon />} /></NavLink>
-          ))}
+      {navigationItems && navigationItems.map(({ name, to, icon: Icon }) => (
+        <BottomNavigationAction label={name} value={to} key={name} icon={<Icon />} />
+      ))}
     </StyledBottomNavigation>
   )
 }
 
-export default memo(BottomNavigation)
+export default withRouter(memo(BottomNavigation))
