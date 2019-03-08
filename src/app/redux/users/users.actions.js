@@ -6,7 +6,8 @@ export const types = createTypes([
   "GET_BY_EMAIL_FAIL",
   "POST",
   "POST_SUCCESS",
-  "POST_FAIL"
+  "POST_FAIL",
+  "CLOSE_SUCCESS_DIALOG"
 ],
 "USERS")
 
@@ -17,5 +18,7 @@ export const actions = {
 
   getByEmail: actionCreator(types.GET_BY_EMAIL, "email"),
   getByEmailSuccess: actionCreator(types.GET_BY_EMAIL_SUCCESS, "data"),
-  getByEmailFail: actionCreator(types.GET_BY_EMAIL_FAIL, "errors")
+  getByEmailFail: actionCreator(types.GET_BY_EMAIL_FAIL, "errors"),
+
+  closeSuccessDialog: actionCreator(types.CLOSE_SUCCESS_DIALOG),
 }

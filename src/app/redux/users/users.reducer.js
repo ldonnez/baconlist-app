@@ -5,7 +5,7 @@ const initialState = {
   data: null,
   isLoading: false,
   errors: null,
-  meta: null
+  success: false,
 }
 
 export default (state = initialState, action) => {
@@ -43,6 +43,7 @@ export default (state = initialState, action) => {
     return {
       ...state,
       errors: null,
+      success: true,
       isLoading: false
     }
 
@@ -51,6 +52,12 @@ export default (state = initialState, action) => {
       ...state,
       isLoading: false,
       errors: action.payload.errors
+    }
+
+  case types.CLOSE_SUCCESS_DIALOG:
+    return {
+      ...state,
+      success: false
     }
 
   default:

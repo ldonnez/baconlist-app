@@ -7,6 +7,7 @@ import SubmitButton from "components/SubmitButton"
 import TextField from "components/TextField"
 import * as selectors from "../../../redux/users/users.selectors"
 import useValidator from "components/Hooks/validator"
+import SuccessDialog from "./SuccessDialog"
 import validations  from "./validations"
 
 export function SignUpForm ({ postUser, errors, loading }) {
@@ -23,55 +24,58 @@ export function SignUpForm ({ postUser, errors, loading }) {
   }
 
   return (
-    <Form method="POST" onSubmit={handleOnSubmit}>
-      <TextField
-        id="firstName"
-        label="First Name"
-        name="first_name"
-        value={formData.first_name}
-        onChange={handleOnChange}
-        errors={validationErrors && validationErrors["first_name"]}
-      />
-      <TextField
-        id="lastName"
-        label="Last Name"
-        name="last_name"
-        value={formData.last_name}
-        onChange={handleOnChange}
-        errors={validationErrors && validationErrors["last_name"]}
-      />
-      <TextField
-        id="email"
-        label="E-mail"
-        name="email"
-        value={formData.email}
-        onChange={handleOnChange}
-        errors={validationErrors && validationErrors["email"]}
-      />
-      <TextField
-        id="password"
-        type="password"
-        label="Password"
-        name="password"
-        value={formData.password}
-        onChange={handleOnChange}
-        errors={validationErrors && validationErrors["password"]}
-      />
-      <TextField
-        id="password_confirmation"
-        type="password"
-        label="Password confirmation"
-        name="password_confirmation"
-        value={formData.password_confirmation}
-        onChange={handleOnChange}
-        errors={validationErrors && validationErrors["password_confirmation"]}
-      />
-      <ActionContainer>
-        <SubmitButton loading={loading} fullWidth type="submit" variant="text" size="large" color="primary">
+    <React.Fragment>
+      <Form method="POST" onSubmit={handleOnSubmit}>
+        <TextField
+          id="firstName"
+          label="First Name"
+          name="first_name"
+          value={formData.first_name}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["first_name"]}
+        />
+        <TextField
+          id="lastName"
+          label="Last Name"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["last_name"]}
+        />
+        <TextField
+          id="email"
+          label="E-mail"
+          name="email"
+          value={formData.email}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["email"]}
+        />
+        <TextField
+          id="password"
+          type="password"
+          label="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["password"]}
+        />
+        <TextField
+          id="password_confirmation"
+          type="password"
+          label="Password confirmation"
+          name="password_confirmation"
+          value={formData.password_confirmation}
+          onChange={handleOnChange}
+          errors={validationErrors && validationErrors["password_confirmation"]}
+        />
+        <ActionContainer>
+          <SubmitButton loading={loading} fullWidth type="submit" variant="text" size="large" color="primary">
             Sign up
-        </SubmitButton>
-      </ActionContainer>
-    </Form>
+          </SubmitButton>
+        </ActionContainer>
+      </Form>
+      <SuccessDialog />
+    </React.Fragment>
   )
 }
 
@@ -86,7 +90,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     errors: selectors.getErrors(state),
-    loading: selectors.isLoading(state)
+    loading: selectors.isLoading(state),
   }
 }
 
