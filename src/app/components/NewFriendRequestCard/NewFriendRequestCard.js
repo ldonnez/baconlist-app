@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import { connect } from "react-redux"
 
 import Card from "@material-ui/core/Card"
@@ -69,4 +69,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(NewFriendRequestCard)
+export default connect(null, mapDispatchToProps)(memo(NewFriendRequestCard))

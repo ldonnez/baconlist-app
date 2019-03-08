@@ -4,13 +4,13 @@ import Badge from "@material-ui/core/Badge"
 import * as selectors from "app/redux/friendRequests/friendRequests.selectors"
 
 function FriendRequestsBadge ({ count, children }) {
-  	return (
-  		<React.Fragment>
+  return (
+    <React.Fragment>
       <Badge color="primary" badgeContent={count} invisible={count === 0 ? true : false}>
         { children }
       </Badge>
-  		</React.Fragment>
-  	)
+    </React.Fragment>
+  )
 }
 
 const mapStateToProps = state => {

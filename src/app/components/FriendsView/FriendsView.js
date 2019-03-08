@@ -15,8 +15,8 @@ function FriendsView () {
     setTab(value)
   }
 
-  	return (
-  		<React.Fragment>
+  return (
+    <React.Fragment>
       <AppBar position="static" color="secondary">
         <Tabs variant="fullWidth" indicatorColor="primary" value={tab} onChange={handleChange}>
           <Tab icon={<People />} label="Friends" />
@@ -25,8 +25,8 @@ function FriendsView () {
       </AppBar>
       {tab === 0 && <Friends />}
       {tab === 1 && <FriendRequests />}
-  		</React.Fragment>
-  	)
+    </React.Fragment>
+  )
 }
 
 export default FriendsView

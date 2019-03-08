@@ -6,7 +6,7 @@ function TagChips ({ tags }) {
     <TagsContainer>
       { tags && tags.map(tag => {
         return (
-		      <StyledChip key={tag.value} label={tag.value} />
+          <StyledChip key={tag.value} label={tag.value} />
         )
       }) }
     </TagsContainer>

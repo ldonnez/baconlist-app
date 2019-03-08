@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect, memo } from "react"
 import { connect } from "react-redux"
 import ListCard from "../ListCard"
 import EditListCard from "../EditListCard"
@@ -9,32 +9,28 @@ import LoadingIndicator from "components/LoadingIndicator"
 import { actions } from "../../redux/lists/lists.actions"
 import * as selectors from "../../redux/lists/lists.selectors"
 
-class Lists extends React.PureComponent {
-  state = {}
+function Lists ({ getLists, lists, editId, loading, newList, onCancelNewList }) {
+  const [expanded, setExpanded] = useState({})
 
-  handlePanelChange = identifier => event => {
-    const expanded = this.state[identifier] ? false : true
-    this.setState({ [identifier]: expanded })
-  }
-
-  componentDidMount = () => {
-    const { getLists } = this.props
+  useEffect(() => {
     getLists()
+  }, [])
+
+  const handlePanelChange = identifier => event => {
+    const isExpanded = expanded[identifier] ? false : true
+    setExpanded({ ...expanded, [identifier]: isExpanded })
   }
 
-  render () {
-    const { lists, editId, loading } = this.props
-    const { newList, onCancelNewList } = this.props
 
-    return (
-      <React.Fragment>
-        <Row>
-          { newList &&
+  return (
+    <React.Fragment>
+      <Row>
+        { newList &&
              <Column spacing={8} lg={3} md={6} xs={12}>
                <NewListCard onClose={onCancelNewList}/>
              </Column>
-          }
-          {lists &&
+        }
+        {lists &&
             lists.map(l => {
               if (l.id === editId) {
                 return (
@@ -47,24 +43,23 @@ class Lists extends React.PureComponent {
                   <Column key={l.id} spacing={8} lg={3} md={6} xs={12}>
                     <ListCard
                       list={l}
-                      onChange={this.handlePanelChange}
-                      expanded={this.state[l.id] && this.state[l.id]}
+                      onChange={handlePanelChange}
+                      expanded={expanded[l.id] && expanded[l.id]}
                     />
                   </Column>
                 )
               }
             })}
+      </Row>
+      {loading && (
+        <Row>
+          <Column lg={12} md={12} xs={12}>
+            <LoadingIndicator />
+          </Column>
         </Row>
-        {loading && (
-          <Row>
-            <Column lg={12} md={12} xs={12}>
-              <LoadingIndicator />
-            </Column>
-          </Row>
-        )}
-      </React.Fragment>
-    )
-  }
+      )}
+    </React.Fragment>
+  )
 }
 
 const mapDispatchToProps = dispatch => {
@@ -84,5 +79,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps,
-  mapDispatchToProps)(Lists)
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Lists))

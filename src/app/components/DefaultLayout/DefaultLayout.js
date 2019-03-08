@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 import Drawer from "components/Drawer"
 import AppBar from "components/AppBar"
 import BottomNavigation from "components/BottomNavigation"
@@ -9,27 +9,24 @@ import { Route } from "react-router-dom"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import navigationItems from "../../navigationItems"
 
-export class Layout extends React.PureComponent {
-  render () {
-    const { children, component: Component, ...rest } = this.props
-    return (
-      <Route
-        {...rest}
-        render={matchProps => (
-          <ApplicationContainer>
-            <CssBaseline />
-            <AppBar />
-            <Drawer navigationItems={navigationItems} />
-            <ContentContainer>
-              <Toolbar />
-              <Component {...matchProps} />
-            </ContentContainer>
-            <BottomNavigation navigationItems={navigationItems} />
-          </ApplicationContainer>
-        )}
-      />
-    )
-  }
+export function Layout ( { children, component: Component, ...rest } ){
+  return (
+    <Route
+      {...rest}
+      render={matchProps => (
+        <ApplicationContainer>
+          <CssBaseline />
+          <AppBar />
+          <Drawer navigationItems={navigationItems} />
+          <ContentContainer>
+            <Toolbar />
+            <Component {...matchProps} />
+          </ContentContainer>
+          <BottomNavigation navigationItems={navigationItems} />
+        </ApplicationContainer>
+      )}
+    />
+  )
 }
 
-export default Layout
+export default memo(Layout)

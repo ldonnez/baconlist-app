@@ -7,8 +7,8 @@ import FriendRequestCard from "../FriendRequestCard"
 import * as selectors from "app/redux/friendRequests/friendRequests.selectors"
 
 function FriendRequests ({ friendRequests }) {
-  	return (
-  		<React.Fragment>
+  return (
+    <React.Fragment>
       <Row margin={16}>
         {  friendRequests && friendRequests.map(fr => {
           return (
@@ -16,10 +16,10 @@ function FriendRequests ({ friendRequests }) {
               <FriendRequestCard friendRequest={fr} />
             </Column>
           )
-        })} 
+        })}
       </Row>
     </React.Fragment>
-  	)
+  )
 }
 
 const mapStateToProps = state => {

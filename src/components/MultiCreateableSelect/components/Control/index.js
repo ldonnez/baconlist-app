@@ -18,7 +18,7 @@ function Control (props) {
     <TextField
       fullWidth
       InputProps={{
- 				inputComponent,
+        inputComponent,
         inputProps: {
           className: props.classes.input,
           children: props.children,

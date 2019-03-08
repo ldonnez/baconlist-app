@@ -15,7 +15,7 @@ function ShareWithDialog ( { open, onClose, onSave, listId, friends } ) {
 
   useEffect(() => {
     setShareWithFriends(friends)
-  },[friends])
+  }, [friends])
 
   const handleCancel = () => {
     onClose()

@@ -16,7 +16,7 @@ function BottomNavigation ( { navigationItems } ){
           navigationItems.map(({ name, to, icon: Icon }) => (
             <NavLink key={name} to={to}><BottomNavigationAction key={name} icon={<Icon />} /></NavLink>
           ))}
-        </StyledBottomNavigation>
+    </StyledBottomNavigation>
   )
 }
 

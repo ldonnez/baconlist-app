@@ -36,8 +36,8 @@ function FriendRequestCard ({ friendRequest, postFriends, deleteFriendRequests }
     deleteFriendRequests({ id: friendRequest.id })
   }
 
-  	return (
-  		<React.Fragment>
+  return (
+    <React.Fragment>
       <Card>
         <CardHeader
           avatar={
@@ -58,7 +58,7 @@ function FriendRequestCard ({ friendRequest, postFriends, deleteFriendRequests }
         </CardActions>
       </Card>
     </React.Fragment>
-  	)
+  )
 }
 
 const mapDispatchToProps = dispatch => {
