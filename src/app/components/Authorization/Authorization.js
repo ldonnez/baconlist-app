@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, memo } from "react"
 import { connect } from "react-redux"
 import { actions } from "../../redux/authorization/authorization.actions"
 import { actions as friendRequestActions } from "../../redux/friendRequests/friendRequests.actions"
@@ -6,21 +6,20 @@ import * as selectors from "../../redux/authorization/authorization.selectors"
 import * as friendRequestsSelectors from "../../redux/friendRequests/friendRequests.selectors"
 import * as token from "../../localStorage/token"
 
-const withAuthorization = WrappedComponent => {
-  class Authorization extends React.Component {
-    componentDidMount () {
-      const { authorize, startListening, isListening } = this.props
+function withAuthorization (WrappedComponent) {
+  function Authorization ({ startListening, isListening, authorized, authorize }) {
+    useEffect(() => {
+      if (!isListening && authorized) {
+        startListening()
+      }
+    },[isListening, startListening, authorized])
+
+    useEffect(() => {
       const accessToken = token.parseToken(token.getAccessToken())
       const refreshToken = token.getRefreshToken()
       authorize({ accessToken: accessToken, refreshToken: refreshToken })
-      if (!isListening) {
-        startListening()
-      }
-    }
-
-    render () {
-      return <WrappedComponent {...this.props} />
-    }
+    }, [])
+    return <WrappedComponent />
   }
 
   const mapStateToProps = state => {
@@ -41,8 +40,7 @@ const withAuthorization = WrappedComponent => {
     }
   }
 
-  return connect(mapStateToProps,
-    mapDispatchToProps)(Authorization)
+  return connect(mapStateToProps, mapDispatchToProps)(memo(Authorization))
 }
 
 export default withAuthorization

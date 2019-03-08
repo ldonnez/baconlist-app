@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { connect } from "react-redux"
 
 import Typography from "@material-ui/core/Typography"
@@ -28,20 +28,16 @@ import TagChips from "./components/TagChips"
 import { actions } from "app/redux/lists/lists.actions"
 import { actions as listsShareWithActions }from "app/redux/listsShareWith/listsShareWith.actions"
 import { actions as friendsActions }from "app/redux/friends/friends.actions"
-import * as selectors from "app/redux/lists/lists.selectors"
 import { getCurrentUser } from "app/redux/authorization/authorization.selectors"
 
-class ListCard extends React.PureComponent {
-  state = {
-    openActionMenu: false,
-    anchorEl: null,
-    openConfirmationDialog: false,
-    openShareWithDialog: false
-  };
+function ListCard ({ list, updateLists, onEdit, deleteLists, getListsShareWith, getFriends, onChange, currentUser, expanded }){
+  const [actionMenu, setActionMenu] = useState({ open: false, anchorEl: null })
+  const [confirmationDialog, setConfirmationDialog] = useState(false)
+  const [shareWithDialog, setShareWithDialog] = useState(false)
 
-  handleOnCompleteTask = index => {
-    const { list, updateLists } = this.props
-    const tasks = list.tasks
+  const tasks = list.tasks
+
+  const handleOnCompleteTask = index => {
     const newTasks = tasks.map((t, i) => {
       if (i !== index) {
         return t
@@ -53,135 +49,125 @@ class ListCard extends React.PureComponent {
     })
     const newList = { ...list, tasks: newTasks }
     updateLists({ data: newList })
-  };
+  }
 
-  handleOnDeleteTask = index => {
-    const { list, updateLists } = this.props
-    const tasks = list.tasks
+  const handleOnDeleteTask = index => {
     const newTasks = tasks.filter((t, i) => i !== index)
     const newList = { ...list, tasks: newTasks }
     updateLists({ data: newList })
-  };
+  }
 
-  handleOnTaskAdd = value => {
-    const { list, updateLists } = this.props
-    const tasks = list.tasks
+  const handleOnTaskAdd = value => {
     const newTask = { name: value, completed: "false" }
     const newTasks = tasks ? [...tasks, newTask] : [newTask]
     const newList = { ...list, tasks: newTasks }
     updateLists({ data: newList })
-  };
-
-  handleOnDeleteList = () => {
-    this.setState({ openActionMenu: false, anchorEl: null, openConfirmationDialog: true })
   }
 
-  handleOnEditList = () => {
-    const { onEdit, list } = this.props
+  const handleOnDeleteList = () => {
+    setActionMenu({ open: false, anchorEl: null })
+    setConfirmationDialog(true)
+  }
+
+  const handleOnEditList = () => {
     onEdit({ id: list.id })
   }
 
-  handleToggleActionMenu = event => {
+  const handleToggleActionMenu = event => {
     const { currentTarget } = event
-    this.setState(state => ({ openActionMenu: !state.openActionMenu, anchorEl: currentTarget }))
-  };
-
-  handleCloseActionMenu = event => {
-    this.setState({ openActionMenu: false, anchorEl: null })
-  };
-
-  handleOnCloseConfirmationDialog = () => {
-    this.setState({ openConfirmationDialog: false })
+    setActionMenu({ open: !actionMenu.open, anchorEl: currentTarget })
   }
 
-  handleOnConfirmationDialog = () => {
-    const { list, deleteLists } = this.props
+  const handleCloseActionMenu = event => {
+    setActionMenu({ open: false, anchorEl: null })
+  }
+
+  const handleOnCloseConfirmationDialog = () => {
+    setConfirmationDialog(false)
+  }
+
+  const handleOnConfirmationDialog = () => {
     deleteLists({ id: list.id })
-    this.setState({ openConfirmationDialog: false })
+    setConfirmationDialog(false)
   }
 
-  handleOpenShareWithDialog = () => {
-    const { list, getFriends, getListsShareWith } = this.props
+  const handleOpenShareWithDialog = () => {
     getFriends()
     getListsShareWith({ id: list.id })
-    this.setState({ openShareWithDialog: true })
+    setShareWithDialog(true)
   }
 
-  handleCloseShareWithDialog = () => {
-    this.setState({ openShareWithDialog: false })
+  const handleCloseShareWithDialog = () => {
+    setShareWithDialog(false)
   }
 
-  handleOnSaveShareWith = friends => {
-    const { list, updateLists } = this.props
+  const handleOnSaveShareWith = friends => {
     const newList = { ...list, shared_with: friends }
     updateLists({ data: newList })
   }
 
-  render () {
-    const { list, onChange, currentUser, expanded } = this.props
-    const tasks = list.tasks
-    return (
-      <StyledCard raised>
-        <StyledCardHeader
-          avatar={
-            <Avatar aria-label="List">
-              {list.name.charAt(0).toUpperCase()}
-            </Avatar>
-          }
-          action={
+  return (
+    <StyledCard raised>
+      <StyledCardHeader
+        avatar={
+          <Avatar aria-label="List">
+            {list.name.charAt(0).toUpperCase()}
+          </Avatar>
+        }
+        action={
+          <React.Fragment>
+            { currentUser.ID === list.user_id &&
             <React.Fragment>
-              { currentUser.ID === list.user_id &&
-            <React.Fragment>
-              <IconButton onClick={this.handleToggleActionMenu}>
+              <IconButton onClick={handleToggleActionMenu}>
                 <MoreVertIcon />
               </IconButton>
               <ActionMenu
-                open={this.state.openActionMenu}
-                anchor={this.state.anchorEl}
+                open={actionMenu.open}
+                anchor={actionMenu.anchorEl}
                 placement="bottom-end"
-                onClose={this.handleCloseActionMenu}
+                onClose={handleCloseActionMenu}
               >
                 <MenuList>
-                  <MenuItem onClick={this.handleOnDeleteList}>Delete</MenuItem>
-                  <MenuItem onClick={this.handleOnEditList}>Edit</MenuItem>
+                  <MenuItem onClick={handleOnDeleteList}>Delete</MenuItem>
+                  <MenuItem onClick={handleOnEditList}>Edit</MenuItem>
                 </MenuList>
               </ActionMenu>
             </React.Fragment>
-              }
-            </React.Fragment>
-          }
-          title={list.name}
-          subheader={list.due_to ? list.due_to : "No due date"}
-        />
-        <StyledCardContent>
-          <TagChips tags={list.tags} />
-          <Description>{list.description}</Description>
-        </StyledCardContent>
-        <CardActions disableActionSpacing>
-          <IconButton
-            onClick={onChange(list.id)}
-            aria-expanded={expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-          { currentUser.ID === list.user_id &&
-          <IconButton onClick={this.handleOpenShareWithDialog}aria-label="Share">
+            }
+          </React.Fragment>
+        }
+        title={list.name}
+        subheader={list.due_to ? list.due_to : "No due date"}
+      />
+      <StyledCardContent>
+        <TagChips tags={list.tags} />
+        <Description>{list.description}</Description>
+      </StyledCardContent>
+      <CardActions disableActionSpacing>
+        <IconButton
+          onClick={onChange(list.id)}
+          aria-expanded={expanded}
+          aria-label="Show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+        { currentUser.ID === list.user_id &&
+          <IconButton onClick={handleOpenShareWithDialog}aria-label="Share">
             <ShareIcon />
           </IconButton>
-          }
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Row margin={8}>
-              <Column lg={12} md={12} xs={12}>
-                <TaskField onAdd={this.handleOnTaskAdd} />
-              </Column>
-            </Row>
-            <Row margin={8}>
-              <Typography variant="button">Todo</Typography>
-            </Row>
-            {tasks &&
+        }
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Row margin={8}>
+            <Column lg={12} md={12} xs={12}>
+              <TaskField onAdd={handleOnTaskAdd} />
+            </Column>
+          </Row>
+          <Row margin={8}>
+            <Typography variant="button">Todo</Typography>
+          </Row>
+          {tasks &&
               tasks.map((task, i) => {
                 return (
                   task.completed === "false" && (
@@ -190,17 +176,17 @@ class ListCard extends React.PureComponent {
                         <Task
                           name={task.name}
                           index={i}
-                          onDelete={this.handleOnCompleteTask}
+                          onDelete={handleOnCompleteTask}
                         />
                       </Column>
                     </Row>
                   )
                 )
               })}
-            <Row margin={8}>
-              <Typography variant="button">Completed</Typography>
-            </Row>
-            {tasks &&
+          <Row margin={8}>
+            <Typography variant="button">Completed</Typography>
+          </Row>
+          {tasks &&
               tasks.map((task, i) => {
                 return (
                   task.completed === "true" && (
@@ -210,38 +196,35 @@ class ListCard extends React.PureComponent {
                           completed
                           name={task.name}
                           index={i}
-                          onDelete={this.handleOnDeleteTask}
+                          onDelete={handleOnDeleteTask}
                         />
                       </Column>
                     </Row>
                   )
                 )
               })}
-          </CardContent>
-        </Collapse>
-        <ConfirmationDialog
-          open={this.state.openConfirmationDialog}
-          onClose={this.handleOnCloseConfirmationDialog}
-          onConfirm={this.handleOnConfirmationDialog}
-          text={`Are you sure you want to delete ${list.name}?`}
-        />
-        { this.state.openShareWithDialog &&
+        </CardContent>
+      </Collapse>
+      <ConfirmationDialog
+        open={confirmationDialog}
+        onClose={handleOnCloseConfirmationDialog}
+        onConfirm={handleOnConfirmationDialog}
+        text={`Are you sure you want to delete ${list.name}?`}
+      />
+      { shareWithDialog &&
           <ShareWithDialog
             listId={list.id}
-            open={this.state.openShareWithDialog}
-            onClose={this.handleCloseShareWithDialog}
-            onSave={this.handleOnSaveShareWith}
+            open={shareWithDialog}
+            onClose={handleCloseShareWithDialog}
+            onSave={handleOnSaveShareWith}
           />
-        }
-      </StyledCard>
-    )
-  }
+      }
+    </StyledCard>
+  )
 }
 
 const mapStateToProps = state => {
   return {
-    tasksTodo: id => selectors.getTodoTasksFromList(state, id),
-    tasksCompleted: id => selectors.getCompletedTasksFromList(state, id),
     currentUser: getCurrentUser(state)
   }
 }

@@ -37,10 +37,10 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
   }
 
   const handleOnTaskAdd = value => {
-  	const tasks = formData.tasks
-  	const newTask = { name: value, completed: "false" }
-  	const newTasks = tasks ? [...tasks, newTask] : [newTask]
-  	setFormData({ ...formData, tasks: newTasks })
+    const tasks = formData.tasks
+    const newTask = { name: value, completed: "false" }
+    const newTasks = tasks ? [...tasks, newTask] : [newTask]
+    setFormData({ ...formData, tasks: newTasks })
   }
 
   const handleOnDeleteTask = index => {
@@ -122,49 +122,49 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
             />
           </Column>
         </Row>
-  					<Row margin={8}>
-  						<Column lg={12} md={12} xs={12}>
-  							<TaskField onAdd={handleOnTaskAdd} />
-  						</Column>
-  					</Row>
-  					<Row margin={8}>
-  						<Typography variant="button">Todo</Typography>
-  					</Row>
-  					{formData.tasks &&
+        <Row margin={8}>
+          <Column lg={12} md={12} xs={12}>
+            <TaskField onAdd={handleOnTaskAdd} />
+          </Column>
+        </Row>
+        <Row margin={8}>
+          <Typography variant="button">Todo</Typography>
+        </Row>
+        {formData.tasks &&
               formData.tasks.map((task, i) => {
-              	return (
-              		task.completed === "false" && (
-              			<Row key={`${list.id}-${i}-${task.name}`}>
-              				<Column lg={12} md={12} xs={12}>
-              					<Task
-              						created
-              						name={task.name}
-              						index={i}
-          								onDelete={handleOnDeleteTask}
-              					/>
-              				</Column>
-              			</Row>
-              		)
-              	)
+                return (
+                  task.completed === "false" && (
+                    <Row key={`${list.id}-${i}-${task.name}`}>
+                      <Column lg={12} md={12} xs={12}>
+                        <Task
+                          created
+                          name={task.name}
+                          index={i}
+                          onDelete={handleOnDeleteTask}
+                        />
+                      </Column>
+                    </Row>
+                  )
+                )
               })}
-  					<Row margin={8}>
-  						<Typography variant="button">Completed</Typography>
-  					</Row>
-  					{formData.tasks &&
+        <Row margin={8}>
+          <Typography variant="button">Completed</Typography>
+        </Row>
+        {formData.tasks &&
               formData.tasks.map((task, i) => {
-              	return (
-              		task.completed === "true" && (
-              			<Row key={`${list.id}-${i}-${task.name}`}>
-              				<Column lg={12} md={12} xs={12}>
-              					<Task
-              						completed
-              						name={task.name}
-              						index={i}
-              					/>
-              				</Column>
-              			</Row>
-              		)
-              	)
+                return (
+                  task.completed === "true" && (
+                    <Row key={`${list.id}-${i}-${task.name}`}>
+                      <Column lg={12} md={12} xs={12}>
+                        <Task
+                          completed
+                          name={task.name}
+                          index={i}
+                        />
+                      </Column>
+                    </Row>
+                  )
+                )
               })}
       </CardContent>
       <Divider />
@@ -177,10 +177,10 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
           loading={loading}
           onClick={handleOnSave}
         >
-          Save
+                Save
         </SubmitButton>
         <Button onClick={handleOnCancel} size="large" color="primary">
-          Cancel
+                Cancel
         </Button>
       </CardActions>
     </Card>
