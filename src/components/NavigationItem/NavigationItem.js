@@ -8,7 +8,8 @@ import { StyledListItem } from "./style"
 
 function NavigationItem ({ name, to, icon: Icon }) {
   const isActive = () => {
-    return !!matchPath(window.location.pathname, to)
+    const path = window.location.pathname === "/" ? "/lists" : window.location.pathname
+    return !!matchPath(path, to)
   }
 
   return (
