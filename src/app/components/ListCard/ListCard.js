@@ -24,6 +24,7 @@ import ShareWithDialog from "../ShareWithDialog"
 import { StyledCard, StyledCardHeader, StyledCardContent } from "./style"
 import Description from "./components/Description"
 import TagChips from "./components/TagChips"
+import From from "./components/From"
 
 import { actions } from "app/redux/lists/lists.actions"
 import { actions as listsShareWithActions }from "app/redux/listsShareWith/listsShareWith.actions"
@@ -142,6 +143,7 @@ function ListCard ({ list, updateLists, onEdit, deleteLists, getListsShareWith, 
       <StyledCardContent>
         <TagChips tags={list.tags} />
         <Description>{list.description}</Description>
+        <From createdBy={list.created_by} />
       </StyledCardContent>
       <CardActions disableActionSpacing>
         <IconButton
