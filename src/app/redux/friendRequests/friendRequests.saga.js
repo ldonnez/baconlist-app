@@ -2,6 +2,7 @@ import { call, put, take, takeLatest } from "redux-saga/effects"
 import * as channels from "../../channels/friendRequests"
 import * as api from "../../api/friendRequests"
 import { actions, types } from "./friendRequests.actions"
+import { actions as notificationActions } from "../notifications/notifications.actions"
 
 export function* watchFriendRequests (action) {
   const type = action.type
@@ -42,6 +43,7 @@ export function* postFriendRequestsFlow (action) {
   try {
     yield call(api.postFriendRequests, action.payload.id)
     yield put(actions.postSuccess())
+    yield put(notificationActions.show({ id: "postFriendRequest", message: "Friend request has been send" }))
   } catch (e) {
     yield put(actions.postFail({ errors: e.response.data }))
   }
@@ -52,6 +54,7 @@ export function* deleteFriendRequestsFlow (action) {
     yield call(api.deleteFriendRequests, action.payload.id)
     yield put(actions.deleteSuccess())
     yield put(actions.refresh())
+    yield put(notificationActions.show({ id: "deleteFriendRequest", message: "Friend request has been ignored" }))
   } catch (e) {
     yield put(actions.deleteFail({ errors: e.response.data }))
   }

@@ -5,6 +5,7 @@ import listsReducer from "./redux/lists/lists.reducer"
 import listsShareWithReducer from "./redux/listsShareWith/listsShareWith.reducer"
 import friendRequestsReducer from "./redux/friendRequests/friendRequests.reducer"
 import friendsReducer from "./redux/friends/friends.reducer"
+import notificationsReducer from "./redux/notifications/notifications.reducer"
 
 export default {
   users: usersReducer,
@@ -13,5 +14,6 @@ export default {
   lists: listsReducer,
   listsShareWith: listsShareWithReducer,
   friendRequests: friendRequestsReducer,
-  friends: friendsReducer
+  friends: friendsReducer,
+  notifications: notificationsReducer
 }

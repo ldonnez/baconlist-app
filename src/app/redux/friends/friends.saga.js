@@ -2,6 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects"
 import * as api from "../../api/friends"
 import { actions, types } from "./friends.actions"
 import { actions as friendRequestActions } from "../friendRequests/friendRequests.actions"
+import { actions as notificationActions } from "../notifications/notifications.actions"
 
 export function* getFriendsFlow (action) {
   try {
@@ -9,9 +10,9 @@ export function* getFriendsFlow (action) {
     yield put(actions.getSuccess({ data: response && response.data }))
   } catch (e) {
     if (e.response.status === 404) {
-		  yield put(actions.getSuccess({ data: [] }))
+      yield put(actions.getSuccess({ data: [] }))
     } else {
-		  yield put(actions.getFail({ errors: e }))
+      yield put(actions.getFail({ errors: e }))
     }
   }
 }
@@ -22,6 +23,7 @@ export function* postFriendsFlow (action) {
     yield put(actions.postSuccess())
     yield put(friendRequestActions.refresh())
     yield put(actions.get())
+    yield put(notificationActions.show({ id: "postFriend", message: "Friend request accepted" }))
   } catch (e) {
     yield put(actions.postFail({ errors: e.response.data }))
   }
@@ -32,6 +34,7 @@ export function* deleteFriendsFlow (action) {
     yield call(api.deleteFriends, action.payload.id)
     yield put(actions.deleteSuccess())
     yield put(actions.get())
+    yield put(notificationActions.show({ id: "deleteFriend", message: "Friend successfully deleted" }))
   } catch (e) {
     yield put(actions.deleteFail({ errors: e.response.data }))
   }

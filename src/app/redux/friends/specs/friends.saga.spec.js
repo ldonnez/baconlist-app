@@ -3,6 +3,7 @@ import { call,  put } from "redux-saga/effects"
 import * as api from "../../../api/friends"
 import { actions } from "../friends.actions"
 import { actions as friendRequestActions } from "../../friendRequests/friendRequests.actions"
+import { actions as notificationActions } from "../../notifications/notifications.actions"
 
 const GET_ACTION =  actions.get()
 const POST_ACTION =  actions.post({ id: 1 })
@@ -52,6 +53,11 @@ describe("Should successfully POST", () => {
     expect(next.value).toMatchObject(put(actions.get()))
   })
 
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "postFriend", message: "Friend request accepted" })))
+  })
+
   it("should be done", () =>{
     next = generator.next()
     expect(next.done).toEqual(true)
@@ -75,6 +81,11 @@ describe("Should successfully DELETE", () => {
   it("should call get", () =>{
     next = generator.next()
     expect(next.value).toMatchObject(put(actions.get()))
+  })
+
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "deleteFriend", message: "Friend successfully deleted" })))
   })
 
   it("should be done", () =>{

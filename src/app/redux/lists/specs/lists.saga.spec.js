@@ -1,6 +1,7 @@
 import { getListsFlow, postListsFlow, patchListsFlow, deleteListsFlow } from "../lists.saga"
 import { call,  put } from "redux-saga/effects"
 import * as api from "../../../api/lists"
+import { actions as notificationActions } from "../../notifications/notifications.actions"
 import { actions } from "../lists.actions"
 
 const mockData = { name: "test" }
@@ -48,6 +49,11 @@ describe("Should successfully POST", () => {
     expect(next.value).toMatchObject(put(actions.get()))
   })
 
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "postList", message: `${mockData.name} created successfully` })))
+  })
+
   it("should be done", () =>{
     next = generator.next()
     expect(next.done).toEqual(true)
@@ -66,6 +72,11 @@ describe("Should successfully PATCH", () => {
   it("should call patchSuccess", () =>{
     next = generator.next()
     expect(next.value).toMatchObject(put(actions.patchSuccess({ data: mockData })))
+  })
+
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "patchList", message: `${mockData.name} updated successfully` })))
   })
 
   it("should be done", () =>{
@@ -91,6 +102,11 @@ describe("Should successfully DELETE", () => {
   it("should call get", () =>{
     next = generator.next()
     expect(next.value).toMatchObject(put(actions.get()))
+  })
+
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "deleteList", message: "List deleted successfully" })))
   })
 
   it("should be done", () =>{

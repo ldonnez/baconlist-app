@@ -2,6 +2,7 @@ import { postFriendRequestsFlow, deleteFriendRequestsFlow, refreshFriendRequests
 import { call,  put } from "redux-saga/effects"
 import * as api from "../../../api/friendRequests"
 import { actions } from "../friendRequests.actions"
+import { actions as notificationActions } from "../../notifications/notifications.actions"
 
 const REFRESH_ACTION =  actions.refresh()
 const POST_ACTION =  actions.post({ id: 1 })
@@ -51,6 +52,11 @@ describe("Should successfully POST", () => {
     expect(next.value).toMatchObject(put(actions.postSuccess()))
   })
 
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "postFriendRequest", message: "Friend request has been send" })))
+  })
+
   it("should be done", () =>{
     next = generator.next()
     expect(next.done).toEqual(true)
@@ -74,6 +80,11 @@ describe("Should successfully DELETE", () => {
   it("should call get", () =>{
     next = generator.next()
     expect(next.value).toMatchObject(put(actions.refresh()))
+  })
+
+  it("should show notification", () =>{
+    next = generator.next()
+    expect(next.value).toMatchObject(put(notificationActions.show({ id: "deleteFriendRequest", message: "Friend request has been ignored" })))
   })
 
   it("should be done", () =>{
