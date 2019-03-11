@@ -21,7 +21,7 @@ import ConfirmationDialog from "components/ConfirmationDialog"
 import Task from "../Task"
 import TaskField from "../TaskField"
 import ShareWithDialog from "../ShareWithDialog"
-import { StyledCard, StyledCardHeader, StyledCardContent } from "./style"
+import { StyledCard, StyledCardHeader, StyledCardContent, StyledIconButton } from "./style"
 import Description from "./components/Description"
 import TagChips from "./components/TagChips"
 import From from "./components/From"
@@ -146,18 +146,18 @@ function ListCard ({ list, updateLists, onEdit, deleteLists, getListsShareWith, 
         <From createdBy={list.created_by} />
       </StyledCardContent>
       <CardActions disableActionSpacing>
-        <IconButton
-          onClick={onChange(list.id)}
-          aria-expanded={expanded}
-          aria-label="Show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
         { currentUser.ID === list.user_id &&
           <IconButton onClick={handleOpenShareWithDialog}aria-label="Share">
             <ShareIcon />
           </IconButton>
         }
+        <StyledIconButton
+          onClick={onChange(list.id)}
+          aria-expanded={expanded}
+          aria-label="Show more"
+        >
+          <ExpandMoreIcon />
+        </StyledIconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
