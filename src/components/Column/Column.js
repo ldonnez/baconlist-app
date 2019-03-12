@@ -17,16 +17,20 @@ const flexBases = {
 }
 
 export default styled("div")(props => {
+  console.log("XS: ", props.xs)
   return {
     padding: `${props.spacing}px`,
     [props.lg ? theme.breakpoints.up("lg") : null]: {
-      flexBasis: `${props.lg ? flexBases[props.lg] : "100%"}`
+      flexBasis: `${props.lg ? flexBases[props.lg] : "100%"}`,
+      display: `${props.lg && props.lg === -1 ? "none" : "block"}`
     },
     [props.md ? theme.breakpoints.down("md") : null]: {
-      flexBasis: `${props.md ? flexBases[props.md] : "100%"}`
+      flexBasis: `${props.md ? flexBases[props.md] : "100%"}`,
+      display: `${props.md && props.md === -1 ? "none" : "block"}`
     },
     [props.xs ? theme.breakpoints.down("sm") : null]: {
-      flexBasis: `${props.xs ? flexBases[props.xs] : "100%"}`
+      flexBasis: `${props.xs ? flexBases[props.xs] : "100%"}`,
+      display: `${props.xs && props.xs === -1 ? "none" : "block"}`
     }
   }
 })
