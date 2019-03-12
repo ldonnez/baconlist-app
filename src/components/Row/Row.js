@@ -4,7 +4,7 @@ export default styled("div")(props => {
   return {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    justifyContent: props.justifyContent || "flex-start",
     [props.margin ? "margin" : null]: `${props.margin}px 0px ${props.margin}px 0px`
   }
 })
