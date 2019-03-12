@@ -16,19 +16,19 @@ export const StyledAppBar = styled(AppBar)(props => {
 
 export const LeftToolbar= styled(Toolbar)(props => {
   return {
-    justifyContent: "start"
+    justifyContent: "flex-start"
   }
 })
 
 export const CenterToolbar= styled(Toolbar)(props => {
   return {
-    justifyContent: "center"
+    justifyContent: "flex-center"
   }
 })
 
 export const RightToolbar= styled(Toolbar)(props => {
   return {
-    justifyContent: "end"
+    justifyContent: "flex-end"
   }
 })
 
