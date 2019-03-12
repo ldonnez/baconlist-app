@@ -15,10 +15,12 @@ function withAuthorization (WrappedComponent) {
     },[isListening, startListening, authorized])
 
     useEffect(() => {
-      const accessToken = token.parseToken(token.getAccessToken())
-      const refreshToken = token.getRefreshToken()
-      authorize({ accessToken: accessToken, refreshToken: refreshToken })
-    }, [])
+      if (!authorized) {
+        const accessToken = token.parseToken(token.getAccessToken())
+        const refreshToken = token.getRefreshToken()
+        authorize({ accessToken: accessToken, refreshToken: refreshToken })
+      }
+    }, [authorized])
     return <WrappedComponent />
   }
 
