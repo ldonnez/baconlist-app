@@ -5,6 +5,19 @@ export const storeToken = (data) => {
   localStorage.setItem(REFRESH_TOKEN_KEY, data.refresh_token.token)
 }
 
+export const removeTokens = () => {
+  removeAccessToken()
+  removeRefreshToken()
+}
+
+export const removeAccessToken = () => {
+  return localStorage.removeItem(ACCESS_TOKEN_KEY)
+}
+
+export const removeRefreshToken = () => {
+  return localStorage.removeItem(REFRESH_TOKEN_KEY)
+}
+
 export const getAccessToken = () => {
   return localStorage.getItem(ACCESS_TOKEN_KEY)
 }

@@ -15,6 +15,17 @@ export function* authenticateFlow (action) {
   }
 }
 
+export function* logoutFlow (action) {
+  try {
+    yield call(token.removeTokens)
+    yield put(actions.logoutSuccess())
+    yield put(push("/signin"))
+  } catch (e) {
+    yield put(actions.logoutFail())
+  }
+}
+
 export default function* authenticateSaga () {
   yield takeLatest(types.AUTHENTICATE, authenticateFlow)
+  yield takeLatest(types.LOGOUT, logoutFlow)
 }

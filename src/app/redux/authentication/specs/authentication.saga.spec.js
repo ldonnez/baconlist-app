@@ -1,4 +1,4 @@
-import { authenticateFlow } from "../authentication.saga"
+import { authenticateFlow, logoutFlow } from "../authentication.saga"
 import { call, put } from "redux-saga/effects"
 import * as api from "../../../api/oauth"
 import * as token from "../../../localStorage/token"
@@ -57,6 +57,27 @@ describe("Should fail authentication", () => {
         email: "E-mail or password is incorrect"
       }
     })))
+  })
+
+  it("should be done", () => {
+    expect(gen.next().done).toEqual(true)
+  })
+})
+
+describe("Should successfully logout", () => {
+  const action = actions.logout()
+  const gen = logoutFlow(action)
+
+  it("should call removeTokens", () => {
+    expect(gen.next().value).toEqual(call(token.removeTokens))
+  })
+
+  it("should call logoutSuccess", () => {
+    expect(gen.next().value).toEqual(put(actions.logoutSuccess()))
+  })
+
+  it("should redirect to /signin", () => {
+    expect(gen.next().value).toEqual(put(push("/signin")))
   })
 
   it("should be done", () => {

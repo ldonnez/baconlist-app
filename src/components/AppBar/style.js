@@ -1,6 +1,7 @@
 import styled from "@emotion/styled"
 import AppBar from "@material-ui/core/AppBar"
 import theme from "../../theme"
+import Toolbar from "@material-ui/core/Toolbar"
 
 export const StyledAppBar = styled(AppBar)(props => {
   return {
@@ -12,3 +13,22 @@ export const StyledAppBar = styled(AppBar)(props => {
     }
   }
 })
+
+export const LeftToolbar= styled(Toolbar)(props => {
+  return {
+    justifyContent: "start"
+  }
+})
+
+export const CenterToolbar= styled(Toolbar)(props => {
+  return {
+    justifyContent: "center"
+  }
+})
+
+export const RightToolbar= styled(Toolbar)(props => {
+  return {
+    justifyContent: "end"
+  }
+})
+

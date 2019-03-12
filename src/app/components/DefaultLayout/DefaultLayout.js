@@ -6,6 +6,7 @@ import ContentContainer from "components/ContentContainer"
 import ApplicationContainer from "components/ApplicationContainer"
 import Toolbar from "components/Toolbar"
 import Notifications from "../Notifications"
+import UserBar from "../UserBar"
 import { Route } from "react-router-dom"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import navigationItems from "../../navigationItems"
@@ -17,7 +18,7 @@ export function Layout ( { children, component: Component, ...rest } ){
       render={matchProps => (
         <ApplicationContainer>
           <CssBaseline />
-          <AppBar />
+          <AppBar rightComponent={<UserBar />}/>
           <Drawer navigationItems={navigationItems} />
           <ContentContainer>
             <Toolbar />
