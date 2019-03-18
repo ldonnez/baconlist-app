@@ -17,7 +17,6 @@ const flexBases = {
 }
 
 export default styled("div")(props => {
-  console.log("XS: ", props.xs)
   return {
     padding: `${props.spacing}px`,
     [props.lg ? theme.breakpoints.up("lg") : null]: {
