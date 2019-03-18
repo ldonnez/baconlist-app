@@ -1,4 +1,4 @@
-import { authorizationFlow } from "../authorization.saga"
+import { authorizationFlow, refreshTokenFlow } from "../authorization.saga"
 import { call, put } from "redux-saga/effects"
 import * as api from "../../../api/oauth"
 import * as token from "../../../localStorage/token"
@@ -55,15 +55,7 @@ describe("Should successfully refresh token", () => {
   })
 
   it("should call refreshToken", () => {
-    expect(gen.next(action).value).toEqual(call(api.refreshToken, payload))
-  })
-
-  it("should call storeToken", () => {
-    expect(gen.next(response).value).toEqual(call(token.storeToken, response.data))
-  })
-
-  it("should call refreshTokenSuccess", () => {
-    expect(gen.next().value).toEqual(put(actions.refreshTokenSuccess()))
+    expect(gen.next(action).value).toEqual(call(refreshTokenFlow, action))
   })
 
   it("should call authorized", () => {

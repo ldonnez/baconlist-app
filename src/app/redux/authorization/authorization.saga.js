@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects"
+import { call, put, takeLatest } from "redux-saga/effects"
 import * as api from "../../api/oauth"
 import * as token from "../../localStorage/token"
 import { actions, types } from "./authorization.actions"
@@ -9,7 +9,7 @@ export function* authorizationFlow (action) {
     const isExpired = yield call(token.isAccessTokenExpired,
       action.payload.accessToken)
     if (isExpired) {
-      yield* refreshTokenFlow(action)
+      yield call(refreshTokenFlow, action)
     }
     yield put(actions.authorizeSuccess({ user: action.payload.accessToken }))
   } catch (e) {
@@ -18,7 +18,7 @@ export function* authorizationFlow (action) {
   }
 }
 
-function* refreshTokenFlow (action) {
+export function* refreshTokenFlow (action) {
   try {
     const response = yield call(api.refreshToken, action.payload)
     yield call(token.storeToken, response && response.data)
@@ -30,5 +30,5 @@ function* refreshTokenFlow (action) {
 }
 
 export default function* authorizationSaga () {
-  yield takeEvery(types.AUTHORIZE, authorizationFlow)
+  yield takeLatest(types.AUTHORIZE, authorizationFlow)
 }

@@ -6,7 +6,6 @@ import { Route, Switch } from "react-router-dom"
 import { ConnectedRouter } from "connected-react-router"
 import { create } from "jss"
 import { createGenerateClassName, jssPreset } from "@material-ui/core/styles"
-import withAuthorization from "./app/components/Authorization"
 import DefaultLayout from "./app/components/DefaultLayout"
 import routes from "./routes"
 import store, { history } from "./store"
@@ -30,7 +29,7 @@ function App () {
                   <DefaultLayout
                     key={path}
                     path={path}
-                    component={withAuthorization(component)}
+                    component={component}
                     {...rest}
                   />
                 ) : (

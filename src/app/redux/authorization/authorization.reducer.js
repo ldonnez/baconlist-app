@@ -12,6 +12,7 @@ export default (state = initialState, action) => {
   case types.AUTHORIZE:
     return {
       ...state,
+      authorized: false,
       loading: true
     }
 
@@ -28,12 +29,14 @@ export default (state = initialState, action) => {
     return {
       ...state,
       loading: false,
+      authorized: false,
       errors: action.payload.errors
     }
 
   case types.REFRESH_TOKEN:
     return {
       ...state,
+      authorized: false,
       loading: true
     }
 
@@ -41,6 +44,7 @@ export default (state = initialState, action) => {
     return {
       ...state,
       loading: false,
+      authorized: false,
       errors: action.payload.errors
     }
 
@@ -48,6 +52,7 @@ export default (state = initialState, action) => {
     return {
       ...state,
       errors: null,
+      authorized: true,
       loading: false
     }
 
