@@ -117,7 +117,7 @@ function ListCard ({ list, updateLists, onEdit, deleteLists, getListsShareWith, 
         }
         action={
           <React.Fragment>
-            { currentUser.ID === list.user_id &&
+            { currentUser && currentUser.ID === list.user_id &&
             <React.Fragment>
               <IconButton onClick={handleToggleActionMenu}>
                 <MoreVertIcon />
@@ -146,7 +146,7 @@ function ListCard ({ list, updateLists, onEdit, deleteLists, getListsShareWith, 
         <From createdBy={list.created_by} />
       </StyledCardContent>
       <CardActions disableActionSpacing>
-        { currentUser.ID === list.user_id &&
+        { currentUser && currentUser.ID === list.user_id &&
           <IconButton onClick={handleOpenShareWithDialog}aria-label="Share">
             <ShareIcon />
           </IconButton>
