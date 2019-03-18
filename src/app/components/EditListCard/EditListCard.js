@@ -61,7 +61,6 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
   const handleOnTagChange = value => {
     setFormData({ ...formData, tags: value })
   }
-  console.log("DUE_TO: ", new Date(formData.due_to).toLocaleDateString())
   return (
     <Card>
       <CardHeader

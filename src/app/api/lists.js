@@ -22,7 +22,6 @@ export const postLists = (values) => {
 }
 
 export const patchLists = (values) => {
-  console.log("VAL: ", values)
   return baconListProtectedApi(`/lists/${values.id}`, {
     method: "PATCH",
     data: serializedList(values)
