@@ -1,6 +1,5 @@
 import { authorizationFlow, refreshTokenFlow } from "../authorization.saga"
 import { call, put } from "redux-saga/effects"
-import * as api from "../../../api/oauth"
 import * as token from "../../../localStorage/token"
 import { actions } from "../authorization.actions"
 
@@ -38,17 +37,6 @@ describe("Should successfully refresh token", () => {
     refreshToken: payload.refreshToken
   })
   const gen = authorizationFlow(action)
-
-  const response = {
-    data: {
-      access_token: {
-        token: "test"
-      },
-      refresh_token: {
-        token: "test"
-      }
-    }
-  }
 
   it("should call isAccessTokenExpired", () => {
     expect(gen.next(action).value).toEqual(call(token.isAccessTokenExpired, payload.accessToken))
