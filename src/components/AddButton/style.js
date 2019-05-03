@@ -6,9 +6,10 @@ export const StyledFab = styled(Fab)(props => {
   return {
     position: "fixed",
     bottom: theme.spacing.unit * 2,
-    right: theme.spacing.unit * 2,
+    right: theme.spacing.unit,
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "48px"
+      marginBottom: "20px",
+      zIndex: "3000"
     }
   }
 })
