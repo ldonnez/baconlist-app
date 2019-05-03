@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, memo } from "react"
 
 import InputAdornment from "@material-ui/core/InputAdornment"
 import TextField from "components/TextField"
@@ -44,4 +44,4 @@ function AddFriendField ({ onChange }) {
   )
 }
 
-export default AddFriendField
+export default memo(AddFriendField)

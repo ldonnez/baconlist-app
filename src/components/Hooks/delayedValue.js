@@ -1,14 +1,14 @@
-import { useEffect } from "react"
+import { useEffect, useCallback } from "react"
 
 export default function useDelayedValue (callback, valueToDelay, delay) {
-  const triggerChange = () => {
+  const triggerChange = useCallback(() => {
     callback(valueToDelay)
-  }
+  }, [valueToDelay, callback])
 
   useEffect(() => {
     let timer = setTimeout(triggerChange, delay)
     return () => {
       clearTimeout(timer)
     }
-  }, [valueToDelay])
+  }, [delay, valueToDelay, triggerChange])
 }

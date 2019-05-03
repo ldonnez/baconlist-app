@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react"
+import React, { memo, useEffect, useState, useCallback } from "react"
 import { connect } from "react-redux"
 
 import Divider from "@material-ui/core/Divider"
@@ -21,12 +21,12 @@ function Friends ({ loading, friends, user, getUsersByEmail, getFriends }) {
 
   useEffect(() => {
     getFriends()
-  }, [])
+  }, [getFriends])
 
-  const onAddFriendChange = value => {
+  const onAddFriendChange = useCallback((value) => {
     getUsersByEmail({ email: value })
     setAdd(true)
-  }
+  }, [getUsersByEmail, setAdd])
 
   const onCancelAdd = () => {
     setAdd(false)
