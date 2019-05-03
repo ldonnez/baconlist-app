@@ -5,6 +5,6 @@ export default function useValidator (data, errors, validations) {
 
   useEffect(() => {
     setValidationErrors({ ...validations(data), ...errors })
-  }, [data, errors])
+  }, [data, errors, validations])
   return validationErrors
 }

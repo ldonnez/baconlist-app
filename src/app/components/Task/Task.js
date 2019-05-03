@@ -20,7 +20,6 @@ function Task ({ name, index, onDelete, completed, created, classes }) {
       label={name}
       deleteIcon={completed || created ?  null : <DoneIcon color="primary"/>}
       onDelete={handleOnDelete}
-      onClick={handleOnDelete}
       classes={{ label: classes.span }}
     />
   )

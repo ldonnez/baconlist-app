@@ -25,13 +25,13 @@ export function Layout ( { children, component: Component, isListening, authoriz
     const accessToken = token.parseToken(token.getAccessToken())
     const storedRefreshToken = token.getRefreshToken()
     authorize({ accessToken: accessToken, refreshToken: storedRefreshToken })
-  }, [])
+  }, [authorize])
 
   useEffect(() => {
     if (!isListening && authorized) {
       startListening()
     }
-  },[isListening, authorized])
+  },[isListening, authorized, startListening])
 
   return (
     <Route

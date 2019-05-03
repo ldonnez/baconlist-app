@@ -14,7 +14,7 @@ function Lists ({ getLists, lists, editId, loading, newList, onCancelNewList }) 
 
   useEffect(() => {
     getLists()
-  }, [])
+  }, [getLists])
 
   const handlePanelChange = identifier => event => {
     const isExpanded = expanded[identifier] ? false : true
