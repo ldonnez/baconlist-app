@@ -151,7 +151,6 @@ function NewListCard ({ postList, errors, loading, onClose }) {
           variant="text"
           size="large"
           color="primary"
-          loading={loading}
           onClick={handleOnSave}
         >
           Save

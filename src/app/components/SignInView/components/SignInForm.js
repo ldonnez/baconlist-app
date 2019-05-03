@@ -42,7 +42,7 @@ export function SignInForm ({ authenticate, errors, loading }) {
         errors={validationErrors && validationErrors["password"]}
       />
       <ActionContainer>
-        <SubmitButton loading={loading} type="submit" variant="text" size="large" color="primary">
+        <SubmitButton type="submit" variant="text" size="large" color="primary">
             Sign In
         </SubmitButton>
       </ActionContainer>

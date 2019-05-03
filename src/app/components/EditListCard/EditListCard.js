@@ -173,7 +173,6 @@ function EditListCard ({ patchList, errors, loading, onEdit, list }) {
           variant="text"
           size="large"
           color="primary"
-          loading={loading}
           onClick={handleOnSave}
         >
                 Save

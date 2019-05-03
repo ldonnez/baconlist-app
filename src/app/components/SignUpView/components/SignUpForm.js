@@ -69,7 +69,7 @@ export function SignUpForm ({ postUser, errors, loading }) {
           errors={validationErrors && validationErrors["password_confirmation"]}
         />
         <ActionContainer>
-          <SubmitButton loading={loading} fullWidth type="submit" variant="text" size="large" color="primary">
+          <SubmitButton fullWidth type="submit" variant="text" size="large" color="primary">
             Sign up
           </SubmitButton>
         </ActionContainer>
