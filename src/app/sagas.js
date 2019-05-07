@@ -5,6 +5,7 @@ import listsSaga from "./redux/lists/lists.saga"
 import listsShareWithSaga from "./redux/listsShareWith/listsShareWith.saga"
 import friendRequestsSaga from "./redux/friendRequests/friendRequests.saga"
 import friendsSaga from "./redux/friends/friends.saga"
+import versionSaga from "./redux/version/version.saga"
 
 export default [
   usersSaga,
@@ -13,5 +14,6 @@ export default [
   listsSaga,
   listsShareWithSaga,
   friendRequestsSaga,
-  friendsSaga
+  friendsSaga,
+  versionSaga
 ]

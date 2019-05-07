@@ -4,6 +4,7 @@ import axios from "axios"
 import { API_URL } from "./config"
 
 export const baconListApi = createApiInstance(axios, API_URL.baconlist)
+export const baconListApp = createApiInstance(axios, API_URL.baconlistApp)
 export const baconListProtectedApi = createProtectedInstance(axios, API_URL.baconlist)
 
 function createProtectedInstance (axios, url) {

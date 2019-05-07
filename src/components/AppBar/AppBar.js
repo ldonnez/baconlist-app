@@ -6,8 +6,8 @@ import Column from "../Column"
 export default function AppBar ({ leftComponent,  centerComponent, rightComponent }) {
   return (
     <StyledAppBar color="secondary" position="fixed" elevation={1}>
-      <Row justifyContent="space-evenly">
-        <Column lg={4} md={4} xs={-1}>
+      <Row justifyContent="space-between" margin="0">
+        <Column lg={4} md={4} xs={1}>
           <LeftToolbar>
             {leftComponent}
           </LeftToolbar>
@@ -17,7 +17,7 @@ export default function AppBar ({ leftComponent,  centerComponent, rightComponen
             {centerComponent}
           </CenterToolbar>
         </Column>
-        <Column lg={4} md={4} xs={12}>
+        <Column lg={4} md={4} xs={11}>
           <RightToolbar>
             {rightComponent}
           </RightToolbar>

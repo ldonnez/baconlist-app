@@ -36,9 +36,9 @@ function UserBar ({ currentUser, logout }) {
     return ""
   }
 
-  const fullName= () => {
+  const name= () => {
     if (currentUser) {
-      return `${firstName} ${lastName}`
+      return `${firstName}`
     }
     return ""
   }
@@ -47,7 +47,7 @@ function UserBar ({ currentUser, logout }) {
     <React.Fragment>
       <StyledAvatar>{ avatarLetters() }</StyledAvatar>
       <Typography variant="button" align="center">
-        {fullName()}
+        {name()}
       </Typography>
       <IconButton onClick={handleOnExitClick}>
         <ExitIcon />

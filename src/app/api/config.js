@@ -5,5 +5,6 @@ const getClientId = () => {
 export const CLIENT_ID = getClientId()
 
 export const API_URL = {
-  baconlist: "https://baconlist-api.duckdns.org"
+  baconlist: "https://baconlist-api.duckdns.org",
+  baconlistApp: "https://baconlist.duckdns.org"
 }

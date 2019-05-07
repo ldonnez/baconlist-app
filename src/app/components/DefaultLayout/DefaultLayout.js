@@ -8,6 +8,7 @@ import LoadingScreen from "components/LoadingScreen"
 import Toolbar from "components/Toolbar"
 import Notifications from "../Notifications"
 import UserBar from "../UserBar"
+import VersionBar from "../VersionBar"
 import { Route } from "react-router-dom"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import navigationItems from "../../navigationItems"
@@ -39,7 +40,7 @@ export function Layout ( { children, component: Component, isListening, authoriz
       render={ matchProps => (
         <ApplicationContainer>
           <CssBaseline />
-          <AppBar rightComponent={<UserBar />}/>
+          <AppBar leftComponent={<VersionBar />} rightComponent={<UserBar />}/>
           <Drawer navigationItems={navigationItems} />
           <ContentContainer>
             <Toolbar />
