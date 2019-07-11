@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types, react/jsx-handler-names */
 
 import React, { memo } from "react"
-import CreateableSelect from "react-select/lib/Creatable"
+import CreateableSelect from "react-select/creatable"
 import NoSsr from "@material-ui/core/NoSsr"
 import Control from "./components/Control"
 import Option from "./components/Option"
