@@ -1,5 +1,5 @@
-import { baconListApp } from "./api"
+import { baconListApi } from "./api"
 
 export const getVersion = () => {
-  return baconListApp.get("/version")
+  return baconListApi.get("/version")
 }
