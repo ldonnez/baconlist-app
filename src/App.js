@@ -1,25 +1,17 @@
 import React from "react"
-import JssProvider from "react-jss/lib/JssProvider"
+import { StylesProvider } from "@material-ui/styles"
 import { MuiThemeProvider } from "@material-ui/core/styles"
 import { Provider } from "react-redux"
 import { Route, Switch } from "react-router-dom"
 import { ConnectedRouter } from "connected-react-router"
-import { create } from "jss"
-import { createGenerateClassName, jssPreset } from "@material-ui/core/styles"
 import DefaultLayout from "./app/components/DefaultLayout"
 import routes from "./routes"
 import store, { history } from "./store"
 import theme from "./theme"
 
-const generateClassName = createGenerateClassName()
-const jss = create({
-  ...jssPreset(),
-  insertionPoint: document.getElementById("jss-insertion-point")
-})
-
 function App () {
   return (
-    <JssProvider jss={jss} generateClassName={generateClassName}>
+    <StylesProvider injectFirst>
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
           <ConnectedRouter history={history}>
@@ -45,7 +37,7 @@ function App () {
           </ConnectedRouter>
         </Provider>
       </MuiThemeProvider>
-    </JssProvider>
+    </StylesProvider>
   )
 }
 

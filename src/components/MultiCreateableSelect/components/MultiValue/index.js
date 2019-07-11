@@ -7,7 +7,7 @@ import { emphasize } from "@material-ui/core/styles/colorManipulator"
 
 const styles = theme => ({
   chip: {
-    margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`,
+    margin: `${theme.spacing() / 2}px ${theme.spacing() / 4}px`,
     height: "25px"
   },
   chipFocused: {
