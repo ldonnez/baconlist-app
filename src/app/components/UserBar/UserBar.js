@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 import Typography from "@material-ui/core/Typography"
-import { StyledAvatar } from "./style"
 import IconButton from "@material-ui/core/IconButton"
 import ExitIcon from "@material-ui/icons/ExitToApp"
 
@@ -14,7 +13,6 @@ function UserBar ({ currentUser, logout }) {
   const [confirmationDialog, setConfirmationDialog] = useState(false)
 
   const firstName = currentUser && currentUser.first_name
-  const lastName = currentUser && currentUser.last_name
 
   const handleOnConfirmationDialog = () => {
     logout()
@@ -29,14 +27,7 @@ function UserBar ({ currentUser, logout }) {
     setConfirmationDialog(false)
   }
 
-  const avatarLetters = () => {
-    if (currentUser) {
-      return `${firstName.charAt(0).toUpperCase()} ${lastName.charAt(0).toUpperCase()}`
-    }
-    return ""
-  }
-
-  const name= () => {
+  const name = () => {
     if (currentUser) {
       return `${firstName}`
     }
@@ -45,7 +36,6 @@ function UserBar ({ currentUser, logout }) {
 
   return (
     <React.Fragment>
-      <StyledAvatar>{ avatarLetters() }</StyledAvatar>
       <Typography variant="button" align="center">
         {name()}
       </Typography>
