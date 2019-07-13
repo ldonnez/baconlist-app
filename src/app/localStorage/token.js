@@ -27,12 +27,14 @@ export const getRefreshToken = () => {
 }
 
 export const isAccessTokenExpired = (accessToken) => {
-  const expirationDate = new Date(accessToken.exp*1000)
+  const expirationDate = accessToken.exp
   return isExpired(expirationDate)
 }
 
-export const isExpired = (date, today = new Date()) => {
-  return ( date <  today )
+export const isExpired = (date) => {
+  const exp = Math.floor(date)
+  const today = Math.floor(Date.now() / 1000)
+  return exp <= today
 }
 
 export const parseToken = (token) => {
