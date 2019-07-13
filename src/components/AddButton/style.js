@@ -8,8 +8,8 @@ export const StyledFab = styled(Fab)(props => {
     bottom: theme.spacing(2),
     right: theme.spacing(),
     [theme.breakpoints.down("sm")]: {
-      marginBottom: "20px",
-      zIndex: "3000"
+      marginBottom: "12px",
+      zIndex: "3000",
     }
   }
 })
