@@ -30,9 +30,6 @@
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint ./"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -40,8 +37,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint-plugin-react": "^7.18.3",
     "redux-devtools": "^3.5.0",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "typescript": "^3.7.5"
   }
 }
