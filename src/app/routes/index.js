@@ -1,51 +1,35 @@
 /* eslint-disable */
-import Loadable from "react-loadable"
-import LoadingScreen from "components/LoadingScreen"
+import { lazy } from "react"
 
 export default [
   {
     path: "/signin",
     exact: true,
     authorized: false,
-    component: Loadable({
-      loader: () => import("./SignIn"),
-      loading: LoadingScreen
-    })
+    component: lazy(() => import("./SignIn"))
   },
   {
     path: "/signup",
     exact: true,
     authorized: false,
-    component: Loadable({
-      loader: () => import("./SignUp"),
-      loading: LoadingScreen
-    })
+    component: lazy(() => import("./SignUp")),
   },
   {
     path: "/",
     exact: true,
     authorized: true,
-    component: Loadable({
-      loader: () => import("./Root"),
-      loading: LoadingScreen
-    })
+    component: lazy(() => import("./Root"))
   },
   {
     path: "/lists",
     exact: true,
     authorized: true,
-    component: Loadable({
-      loader: () => import("./Root"),
-      loading: LoadingScreen
-    })
+    component: lazy(() => import("./Root"))
   },
   {
     path: "/friends",
     exact: true,
     authorized: true,
-    component: Loadable({
-      loader: () => import("./Friends"),
-      loading: LoadingScreen
-    })
+    component: lazy(() => import("./Friends"))
   }
 ]
